@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Miguel Fedosyeyev](https://up.htmlacademy.ru/javascript/24/user/679259).
-* Наставник: `Неизвестно`.
+* Наставник: [Кристина Жиделягина](https://htmlacademy.ru/profile/id575159).
 
 ---
 
