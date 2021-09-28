@@ -4,7 +4,7 @@ function randomNumber(min, max, afterPoint) {
     return Number(rand.toFixed(afterPoint));
   }
 
-  console.log('The range can only be positive, including zero!');
+  return 'The range can only be positive, including zero!';
 }
 
 randomNumber(0, 10, 0);
