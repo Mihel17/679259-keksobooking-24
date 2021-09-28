@@ -1,5 +1,5 @@
 function randomNumber(min, max, afterPoint) {
-  if (min >= 0 && max >= 0) {
+  if (min >= 0 && max >= 0 && max >= 0) {
     let rand = min + (Math.random() * (max - min));
     return Number(rand.toFixed(afterPoint));
   }
@@ -7,4 +7,4 @@ function randomNumber(min, max, afterPoint) {
   alert('The range can only be positive, including zero!')
 }
 
-randomNumber(0, 10, 5);
+randomNumber(0, 10, 0);
