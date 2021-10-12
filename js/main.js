@@ -6,10 +6,6 @@ function randomInt(min, max) {
   return 'The range can only be positive, including zero!';
 }
 
-randomInt(0, 10);
-
-// -----------------------------------------------------
-
 function randomNumber(min, max, afterPoint) {
   if (min >= 0 && max >= 0 && afterPoint >= 0) {
     const rand = min + (Math.random() * (max - min));
@@ -18,23 +14,9 @@ function randomNumber(min, max, afterPoint) {
   return 'The range can only be positive, including zero!';
 }
 
-randomNumber(0, 10, 0);
-
-
-
-// =====================================================
-// -----------------------------------------------------
-// -----------------------------------------------------
-// -----------------------------------------------------
-// =====================================================
-
-
-
 const randomFromArray = (randomNumber, array) => {
   return array[randomNumber];
 }
-
-// ------------------------------------------
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -43,14 +25,12 @@ function shuffle(array) {
   }
 }
 
-// ------------------------------------------
-
-function randomArray(array) {
-  const arrayFeatures = array.map(element => element);
-  shuffle(arrayFeatures);
-  let newLength = Math.ceil(Math.random() * features.length);
-  let portion = arrayFeatures.slice(0, newLength);
-  return portion;
+function randomStrFromArray(array) {
+  const newArray = array.map(element => element);
+  shuffle(newArray);
+  let newLength = Math.ceil(Math.random() * array.length);
+  let portion = newArray.slice(0, newLength);
+  return portion.join(', ');
 }
 
 // -----------------------------------------------------
@@ -71,7 +51,7 @@ const offers = {
     guests: 0,
     checking: 'hz',
     checkout: 'hz',
-    features: randomArray(features),
+    features: randomStrFromArray(features),
     description: 'description',
   },
   location: {
