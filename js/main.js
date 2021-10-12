@@ -37,31 +37,34 @@ function randomStrFromArray(array) {
 
 const type = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+const checking = ['12:00', '13:00', '14:00'];
+const checkout = ['12:00', '13:00', '14:00'];
 
-const offers = {
-  author: {
-    avatar: 'img/avatars/user' + randomInt(0, 10) + '.png',
-  },
-  offer: {
-    title: 'title',
-    address: 'address',
-    price: 0,
-    type: randomFromArray(randomNumber(0, type.length - 1, 0), type),
-    rooms: 0,
-    guests: 0,
-    checking: 'hz',
-    checkout: 'hz',
-    features: randomStrFromArray(features),
-    description: 'description',
-  },
-  location: {
-    lat: randomNumber(35.65000, 35.70000, 5),
-    lng: randomNumber(139.70000, 139.80000, 5),
-  }
+
+for (let i = 0; i < 5; i++) {
+  const offers = {
+   author: {
+     avatar: 'img/avatars/user' + randomInt(0, 10) + '.png',
+   },
+   offer: {
+     title: 'title',
+      address: 'address',
+      price: randomNumber(100, 1000, 0),
+      type: randomFromArray(randomNumber(0, type.length - 1, 0), type),
+      rooms: randomNumber(1, 4, 0),
+      guests: randomNumber(1, 6, 0),
+      checking: randomFromArray(randomNumber(0, checking.length - 1, 0), checking),
+      checkout: randomFromArray(randomNumber(0, checkout.length - 1, 0), checkout),
+      features: randomStrFromArray(features),
+      description: 'description',
+   },
+   location: {
+     lat: randomNumber(35.65000, 35.70000, 5),
+     lng: randomNumber(139.70000, 139.80000, 5),
+   }
+   }
+  console.log(offers);
 }
-
-console.log(offers);
-
 // -----------------------------------------------------
 
 
