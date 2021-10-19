@@ -33,11 +33,40 @@ function randomStrFromArray(array) {
   return portion.join(', ');
 }
 
+// function randomLocation(min1, max1, afterPoint1, min2, max2, afterPoint2) {
+//   let location = {};
+//   let lat = randomNumber(min1, max1, afterPoint1);
+//   let lng = randomNumber(min2, max2, afterPoint2);
+//   location.lat = lat;
+//   location.lng = lng;
+//   return location;
+// };
+
+const randomLocation = (min1, max1, afterPoint1, min2, max2, afterPoint2) => {
+  let location = {};
+  let lat = randomNumber(min1, max1, afterPoint1);
+  let lng = randomNumber(min2, max2, afterPoint2);
+  location.lat = lat;
+  location.lng = lng;
+  return location;
+};
+
+// function setAddress (location) {
+//   let address = [location.lat, location.lng];
+//   return address.join(',');
+// };
+
+const setAddress = (location) => {
+  let address = [location.lat, location.lng];
+  return address.join(',');
+};
+
 // -----------------------------------------------------
 
-// const title = [{ title: 'Vista Sunrise Apartments', address: '1313 East Vista Chino Road, Palm Springs, CA 92262-3386' }, { title: 'CASA BELLA', address: '16980 Nisqualli Road, Victorville, CA 92395' }, 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park',];
-
-const apartments = [{ title: 'Vista Sunrise Apartments', address: '1313 East Vista Chino Road, Palm Springs, CA 92262-3386' }, { title: 'CASA BELLA', address: '16980 Nisqualli Road, Victorville, CA 92395'},];
+const title = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park',];
+photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 const type = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const checking = ['12:00', '13:00', '14:00'];
@@ -53,11 +82,11 @@ const description = [
 for (let i = 0; i < 10; i++) {
   const offers = {
    author: {
-     avatar: 'img/avatars/user' + randomInt(0, 10) + '.png',
+      avatar: 'img/avatars/user' + randomInt(0, 10) + '.png',
    },
    offer: {
-      title: randomFromArray(randomNumber(0, apartments.length - 1, 0), apartments),
-      address: 'address',
+      title: randomFromArray(randomNumber(0, title.length - 1, 0), title),
+      address: setAddress(offers.location),
       price: randomNumber(100, 1000, 0),
       type: randomFromArray(randomNumber(0, type.length - 1, 0), type),
       rooms: randomNumber(1, 4, 0),
@@ -66,13 +95,11 @@ for (let i = 0; i < 10; i++) {
       checkout: randomFromArray(randomNumber(0, checkout.length - 1, 0), checkout),
       features: randomStrFromArray(features),
       description: randomFromArray(randomNumber(0, description.length - 1, 0), description),
-      photos: 'hz',
+      photos: randomFromArray(randomNumber(0, photos.length - 1, 0), photos),
    },
-   location: {
-     lat: randomNumber(35.65000, 35.70000, 5),
-     lng: randomNumber(139.70000, 139.80000, 5),
-   }
+    location: randomLocation(35.65000, 35.70000, randomNumber(0, 10, 0), 139.70000, 139.80000, randomNumber(0, 10, 0))
    }
   console.log(offers);
 }
+
 // -----------------------------------------------------
