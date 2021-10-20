@@ -1,70 +1,37 @@
-function randomInt(min, max) {
-  if (min >= 0 && max >= 0) {
-    const rand = Math.round(min + (Math.random() * (max - min)));
-    return (rand < 10 ? '0' : '') + rand;
-  }
-  return 'The range can only be positive, including zero!';
+import { randomInt, randomNumber, randomFromArray, shuffle, randomStrFromArray } from './utils/get-random';
+
+function randomLocation(min1, max1, afterPoint1, min2, max2, afterPoint2) {
+  const location = {};
+  const lat = randomNumber(min1, max1, afterPoint1);
+  const lng = randomNumber(min2, max2, afterPoint2);
+  location.lat = lat;
+  location.lng = lng;
+  return location;
 }
 
-function randomNumber(min, max, afterPoint) {
-  if (min >= 0 && max >= 0 && afterPoint >= 0) {
-    const rand = min + (Math.random() * (max - min));
-    return Number(rand.toFixed(afterPoint));
-  }
-  return 'The range can only be positive, including zero!';
-}
-
-const randomFromArray = (randomNumber, array) => {
-  return array[randomNumber];
-}
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-function randomStrFromArray(array) {
-  const newArray = array.map(element => element);
-  shuffle(newArray);
-  let newLength = Math.ceil(Math.random() * array.length);
-  let portion = newArray.slice(0, newLength);
-  return portion.join(', ');
-}
-
-// function randomLocation(min1, max1, afterPoint1, min2, max2, afterPoint2) {
-//   let location = {};
-//   let lat = randomNumber(min1, max1, afterPoint1);
-//   let lng = randomNumber(min2, max2, afterPoint2);
+// const randomLocation = (min1, max1, afterPoint1, min2, max2, afterPoint2) => {
+//   const location = {};
+//   const lat = randomNumber(min1, max1, afterPoint1);
+//   const lng = randomNumber(min2, max2, afterPoint2);
 //   location.lat = lat;
 //   location.lng = lng;
 //   return location;
 // };
 
-const randomLocation = (min1, max1, afterPoint1, min2, max2, afterPoint2) => {
-  let location = {};
-  let lat = randomNumber(min1, max1, afterPoint1);
-  let lng = randomNumber(min2, max2, afterPoint2);
-  location.lat = lat;
-  location.lng = lng;
-  return location;
-};
+function setAddress (location) {
+  const address = [location.lat, location.lng];
+  return address.join(',');
+}
 
-// function setAddress (location) {
-//   let address = [location.lat, location.lng];
+// const setAddress = (location) => {
+//   const address = [location.lat, location.lng];
 //   return address.join(',');
 // };
 
-const setAddress = (location) => {
-  let address = [location.lat, location.lng];
-  return address.join(',');
-};
-
 // -----------------------------------------------------
 
-const title = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park',];
-photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+const title = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park'];
+const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 const type = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -81,10 +48,10 @@ const description = [
 
 for (let i = 0; i < 10; i++) {
   const offers = {
-   author: {
-      avatar: 'img/avatars/user' + randomInt(0, 10) + '.png',
-   },
-   offer: {
+    author: {
+      avatar: `img/avatars/user${  randomInt(0, 10)  }.png`,
+    },
+    offer: {
       title: randomFromArray(randomNumber(0, title.length - 1, 0), title),
       address: setAddress(offers.location),
       price: randomNumber(100, 1000, 0),
@@ -96,9 +63,10 @@ for (let i = 0; i < 10; i++) {
       features: randomStrFromArray(features),
       description: randomFromArray(randomNumber(0, description.length - 1, 0), description),
       photos: randomFromArray(randomNumber(0, photos.length - 1, 0), photos),
-   },
-    location: randomLocation(35.65000, 35.70000, randomNumber(0, 10, 0), 139.70000, 139.80000, randomNumber(0, 10, 0))
-   }
+    },
+    location: randomLocation(35.65000, 35.70000, randomNumber(0, 10, 0), 139.70000, 139.80000, randomNumber(0, 10, 0)),
+  };
+
   console.log(offers);
 }
 
