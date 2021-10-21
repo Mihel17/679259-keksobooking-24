@@ -1,34 +1,6 @@
-import { randomInt, randomNumber, randomFromArray, shuffle, randomStrFromArray } from './utils/get-random';
+import { randomNumber, randomFromArray, shuffle } from './utils/get-random.js';
 
-function randomLocation(min1, max1, afterPoint1, min2, max2, afterPoint2) {
-  const location = {};
-  const lat = randomNumber(min1, max1, afterPoint1);
-  const lng = randomNumber(min2, max2, afterPoint2);
-  location.lat = lat;
-  location.lng = lng;
-  return location;
-}
-
-// const randomLocation = (min1, max1, afterPoint1, min2, max2, afterPoint2) => {
-//   const location = {};
-//   const lat = randomNumber(min1, max1, afterPoint1);
-//   const lng = randomNumber(min2, max2, afterPoint2);
-//   location.lat = lat;
-//   location.lng = lng;
-//   return location;
-// };
-
-function setAddress (location) {
-  const address = [location.lat, location.lng];
-  return address.join(',');
-}
-
-// const setAddress = (location) => {
-//   const address = [location.lat, location.lng];
-//   return address.join(',');
-// };
-
-// -----------------------------------------------------
+const OFFERS_COUNT = 10;
 
 const title = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park'];
 const photos = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -46,28 +18,35 @@ const description = [
 ];
 
 
-for (let i = 0; i < 10; i++) {
-  const offers = {
-    author: {
-      avatar: `img/avatars/user${  randomInt(0, 10)  }.png`,
-    },
-    offer: {
-      title: randomFromArray(randomNumber(0, title.length - 1, 0), title),
-      address: setAddress(offers.location),
-      price: randomNumber(100, 1000, 0),
-      type: randomFromArray(randomNumber(0, type.length - 1, 0), type),
-      rooms: randomNumber(1, 4, 0),
-      guests: randomNumber(1, 6, 0),
-      checking: randomFromArray(randomNumber(0, checking.length - 1, 0), checking),
-      checkout: randomFromArray(randomNumber(0, checkout.length - 1, 0), checkout),
-      features: randomStrFromArray(features),
-      description: randomFromArray(randomNumber(0, description.length - 1, 0), description),
-      photos: randomFromArray(randomNumber(0, photos.length - 1, 0), photos),
-    },
-    location: randomLocation(35.65000, 35.70000, randomNumber(0, 10, 0), 139.70000, 139.80000, randomNumber(0, 10, 0)),
-  };
+const offers = [];
 
-  console.log(offers);
-}
+const addOffers = () => {
+  for (let i = 0; i < OFFERS_COUNT; i++) {
+    offers.push({
+      author: {
+        avatar: `img/avatars/user${i + 1 < 10 ? 0 : ''}${i + 1}.png`,
+      },
+      offer: {
+        title: randomFromArray(randomNumber(0, title.length - 1, 0), title),
+        address: `${randomNumber(100, 1000, 0)}, ${randomNumber(100, 1000, 0)}`,
+        price: randomNumber(100, 1000, 0),
+        type: randomFromArray(randomNumber(0, type.length - 1, 0), type),
+        rooms: randomNumber(1, 4, 0),
+        guests: randomNumber(1, 6, 0),
+        checking: randomFromArray(randomNumber(0, checking.length - 1, 0), checking),
+        checkout: randomFromArray(randomNumber(0, checkout.length - 1, 0), checkout),
+        features: shuffle(features).slice(0, randomNumber(0, features.length, 0)),
+        description: randomFromArray(randomNumber(0, description.length - 1, 0), description),
+        photos: randomFromArray(randomNumber(0, photos.length - 1, 0), photos),
+      },
+      location: {
+        lat: randomNumber(35.65000, 35.70000, 5),
+        lng: randomNumber(139.70000, 139.80000, 5),
+      },
+    });
+  }
+};
 
-// -----------------------------------------------------
+addOffers();
+
+export { offers };
