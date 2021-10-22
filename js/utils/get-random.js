@@ -33,7 +33,7 @@ const shuffle = (array) => {
 //-------------------------------
 
 //EXPORT-------------------------
-export { randomNumber, randomFromArray, shuffle, randomInt  };
+export { randomNumber, randomFromArray, shuffle, randomInt };
 //-------------------------------
 
 //END-----------------------------
