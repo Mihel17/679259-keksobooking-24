@@ -1,24 +1,27 @@
 //RANDOM NUMBER ---------------------
-const randomInt = (min, max) => {
-  if (min >= 0 && max >= 0) {
-    const rand = Math.round(min + (Math.random() * (max - min)));
-    return (rand < 10 ? '0' : '') + rand;
+const randomNumber = (min, max, afterPoint) => {
+  if (afterPoint) {
+    if (min >= 0 && max >= 0 && afterPoint >= 0) {
+      const rand = min + (Math.random() * (max - min));
+      return Number(rand.toFixed(afterPoint));
+    }
+    return -1;
+  } else {
+    if (min >= 0 && max >= 0) {
+      afterPoint = 0;
+      const rand = min + (Math.random() * (max - min));
+      return Number(rand.toFixed(afterPoint));
+    }
+    return -1;
   }
-  return 'The range can only be positive, including zero!';
 };
 
-const randomNumber = (min, max, afterPoint) => {
-  if (min >= 0 && max >= 0 && afterPoint >= 0) {
-    const rand = min + (Math.random() * (max - min));
-    return Number(rand.toFixed(afterPoint));
-  }
-  return 'The range can only be positive, including zero!';
-};
+randomNumber(1, 20, 1);
 //-------------------------------
 
 
 //RANDOM ELEMENT FROM ARRAY -----
-const randomFromArray = (randNumber, array) => array[randNumber];
+const randomFromArray = (array) => array[randomNumber(0, array.length - 1, 0)];
 //-------------------------------
 
 
@@ -33,7 +36,7 @@ const shuffle = (array) => {
 //-------------------------------
 
 //EXPORT-------------------------
-export { randomNumber, randomFromArray, shuffle, randomInt };
+export { randomNumber, randomFromArray, shuffle };
 //-------------------------------
 
 //END-----------------------------
