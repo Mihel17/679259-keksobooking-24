@@ -8,41 +8,17 @@ const TYPE_TRANSLATE = {
   hotel: 'Отель',
 };
 
-console.log(offers);
-
-// console.log(collectionItem);
-// console.log(necessaryElements);
-//       // necessaryElements.some(
-//       //   (necessaryElement) => {
-//       //     collectionItem.classList.contains(`popup__feature--${necessaryElement}`);
-//       //   });
-
-
 const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
-  const functionMy = () => {
-    const containers = document.querySelectorAll(containerClass);
-    containers.forEach((container) => {
-      const collectionItem = container.children;
-      const isNecessary = necessaryElements.some(
-        (necessaryElement) => collectionItem.classList.contains(`popup__feature--${necessaryElement}`),
-      );
-      if (!isNecessary) {
-        collectionItem.remove();
-      }
-    });
-  };
-  return functionMy;
+  const collectionItems = containerClass.querySelectorAll('.popup__feature');
+  collectionItems.forEach((collectionItem) => {
+    const isNecessary = necessaryElements.some(
+      (necessaryElement) => collectionItem.classList.contains(`popup__feature--${necessaryElement}`),
+    );
+    if (!isNecessary) {
+      collectionItem.remove();
+    }
+  });
 };
-
-// emojiList.forEach((emojiListItem) => {
-//   const isNecessary = userEmotions.some(
-//     (userEmotion) => emojiListItem.classList.contains('emoji--' + userEmotion),
-//   );
-//   if (!isNecessary) {
-//     emojiListItem.remove();
-//   }
-// });
-
 
 const mapContainer = document.querySelector('#map-canvas');
 const CARD_TEMPLATE = document.querySelector('#card')
@@ -58,16 +34,19 @@ const createCard = (array) => {
     card.querySelector('.popup__type').textContent = TYPE_TRANSLATE[offer.offer.type];
     card.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms} комнаты для ${offer.offer.guests} гостей`;// make funct "1 гостей"
     card.querySelector('.popup__text--time').textContent = `Заезд после ${offer.offer.checkin}, выезд до ${offer.offer.checkout}`;
-    // deleteUnnecessaryElements('.popup__features', offer.offer.features);
-    deleteUnnecessaryElements('.popup__features', offer.offer.features);
+    // console.log(card.querySelector('.popup__features'));
+    deleteUnnecessaryElements(card.querySelector('.popup__features'), offer.offer.features);
     card.querySelector('.popup__description').textContent = offer.offer.description;
     card.querySelector('.popup__photo').src = offer.offer.photos;
     card.querySelector('.popup__avatar').src = offer.author.avatar;
-
 
     // add to html
     mapContainer.append(card);
   });
 };
+
+document.querySelector('.map__canvas').setAttribute('style', 'display:grid; grid-template-columns: repeat(4, 1fr);');
+// как можно через точечную нотацию задать несколько css свойств
+
 
 createCard(offers);
