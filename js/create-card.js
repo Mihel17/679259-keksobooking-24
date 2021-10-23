@@ -34,7 +34,6 @@ const createCard = (array) => {
     card.querySelector('.popup__type').textContent = TYPE_TRANSLATE[offer.offer.type];
     card.querySelector('.popup__text--capacity').textContent = `${offer.offer.rooms} комнаты для ${offer.offer.guests} гостей`;// make funct "1 гостей"
     card.querySelector('.popup__text--time').textContent = `Заезд после ${offer.offer.checkin}, выезд до ${offer.offer.checkout}`;
-    // console.log(card.querySelector('.popup__features'));
     deleteUnnecessaryElements(card.querySelector('.popup__features'), offer.offer.features);
     card.querySelector('.popup__description').textContent = offer.offer.description;
     card.querySelector('.popup__photo').src = offer.offer.photos;
@@ -47,6 +46,5 @@ const createCard = (array) => {
 
 document.querySelector('.map__canvas').setAttribute('style', 'display:grid; grid-template-columns: repeat(4, 1fr);');
 // как можно через точечную нотацию задать несколько css свойств
-
 
 createCard(offers);
