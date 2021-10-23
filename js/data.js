@@ -2,6 +2,33 @@ import { randomNumber, randomFromArray, shuffle } from './utils/get-random.js';
 
 const OFFERS_COUNT = 10;
 
+const Price = {
+  MIN: 0,
+  MAX: 1000,
+}
+
+const Location = {
+  LAT: {
+    MIN: 35.65000,
+    MAX: 35.70000,
+  },
+  LNG: {
+    MIN: 139.70000,
+    MAX: 139.80000,
+  },
+  AFTER_POINT: 5,
+}
+
+const Rooms = {
+  MIN: 1,
+  MAX: 4,
+}
+
+const Guests = {
+  MIN: Rooms.MIN,
+  MAX: Rooms.MAX * 2,
+}
+
 const TITLES = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
@@ -26,21 +53,21 @@ const addOffers = () => {
         avatar: `img/avatars/user${i + 1 < 10 ? `0${i}` : `''${i}`}.png`,
       },
       offer: {
-        titleS: randomFromArray(TITLES),
-        address: `${randomNumber(100, 1000)}, ${randomNumber(100, 1000)}`,
-        price: randomNumber(100, 1000),
-        typeS: randomFromArray(TYPES),
-        rooms: randomNumber(1, 4),
-        guests: randomNumber(1, 6),
+        title: randomFromArray(TITLES),
+        address: `${randomNumber(Location.LAT.MIN, Location.LAT.MAX, Location.AFTER_POINT)}, ${randomNumber(Location.LNG.MIN, Location.LNG.MAX, Location.AFTER_POINT)}`,
+        price: randomNumber(Price.MIN, Price.MAX),
+        type: randomFromArray(TYPES),
+        rooms: randomNumber(Rooms.MIN, Rooms.MAX),
+        guests: randomNumber(Guests.MIN, Guests.MAX),
         checking_TIME: randomFromArray(CHECKING_TIME),
         checkout_TIME: randomFromArray(CHECKOUT_TIME),
         features: shuffle(FEATURES).slice(0, randomNumber(0, FEATURES.length)),
-        descriptionS: randomFromArray(DESCRIPTIONS),
+        description: randomFromArray(DESCRIPTIONS),
         photos: randomFromArray(PHOTOS),
       },
       location: {
-        lat: randomNumber(35.65000, 35.70000, 5),
-        lng: randomNumber(139.70000, 139.80000, 5),
+        lat: randomNumber(Location.LAT.MIN, Location.LAT.MAX, Location.AFTER_POINT),
+        lng: randomNumber(Location.LNG.MIN, Location.LNG.MAX, Location.AFTER_POINT),
       },
     });
   }

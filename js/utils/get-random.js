@@ -15,8 +15,6 @@ const randomNumber = (min, max, afterPoint) => {
     return -1;
   }
 };
-
-randomNumber(1, 20, 1);
 //-------------------------------
 
 

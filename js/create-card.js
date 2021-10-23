@@ -20,6 +20,8 @@ import { offers } from './data.js';
 //   });
 // };
 
+console.log(offers);
+
 const mapContainer = document.querySelector('#map-canvas');
 const CARD_TEMPLATE = document.querySelector('#card')
   .content
