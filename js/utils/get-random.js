@@ -1,5 +1,5 @@
 //RANDOM NUMBER ---------------------
-const randomNumber = (min, max, afterPoint) => {
+const getRandomNumber = (min, max, afterPoint) => {
   if (afterPoint) {
     if (min >= 0 && max >= 0 && afterPoint >= 0) {
       const rand = min + (Math.random() * (max - min));
@@ -19,7 +19,7 @@ const randomNumber = (min, max, afterPoint) => {
 
 
 //RANDOM ELEMENT FROM ARRAY -----
-const randomFromArray = (array) => array[randomNumber(0, array.length - 1, 0)];
+const getRandomFromArray = (array) => array[getRandomNumber(0, array.length - 1, 0)];
 //-------------------------------
 
 
@@ -34,7 +34,7 @@ const shuffle = (array) => {
 //-------------------------------
 
 //EXPORT-------------------------
-export { randomNumber, randomFromArray, shuffle };
+export { getRandomNumber, getRandomFromArray, shuffle };
 //-------------------------------
 
 //END-----------------------------

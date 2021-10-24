@@ -1,4 +1,4 @@
-import { randomNumber, randomFromArray, shuffle } from './utils/get-random.js';
+import { getRandomNumber, getRandomFromArray, shuffle } from './utils/get-random.js';
 
 const OFFERS_COUNT = 10;
 const TITLES = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park'];
@@ -19,7 +19,7 @@ const DESCRIPTIONS = [
 const Price = {
   MIN: 0,
   MAX: 1000,
-}
+};
 
 const Location = {
   LAT: {
@@ -31,17 +31,17 @@ const Location = {
     MAX: 139.80000,
   },
   AFTER_POINT: 5,
-}
+};
 
 const Rooms = {
   MIN: 1,
   MAX: 4,
-}
+};
 
 const Guests = {
   MIN: Rooms.MIN,
   MAX: Rooms.MAX * 2,
-}
+};
 
 const offers = [];
 const addOffers = () => {
@@ -51,21 +51,21 @@ const addOffers = () => {
         avatar: `img/avatars/user${i + 1 < 10 ? `0${i + 1}` : `${i + 1}`}.png`,
       },
       offer: {
-        title: randomFromArray(TITLES),
-        address: `${randomNumber(Location.LAT.MIN, Location.LAT.MAX, Location.AFTER_POINT)}, ${randomNumber(Location.LNG.MIN, Location.LNG.MAX, Location.AFTER_POINT)}`,
-        price: randomNumber(Price.MIN, Price.MAX),
-        type: randomFromArray(TYPES),
-        rooms: randomNumber(Rooms.MIN, Rooms.MAX),
-        guests: randomNumber(Guests.MIN, Guests.MAX),
-        checkin: randomFromArray(CHECKING_TIME),
-        checkout: randomFromArray(CHECKOUT_TIME),
-        features: shuffle(FEATURES).slice(0, randomNumber(0, FEATURES.length)),
-        description: randomFromArray(DESCRIPTIONS),
-        photos: randomFromArray(PHOTOS),
+        title: getRandomFromArray(TITLES),
+        address: `${getRandomNumber(Location.LAT.MIN, Location.LAT.MAX, Location.AFTER_POINT)}, ${getRandomNumber(Location.LNG.MIN, Location.LNG.MAX, Location.AFTER_POINT)}`,
+        price: getRandomNumber(Price.MIN, Price.MAX),
+        type: getRandomFromArray(TYPES),
+        rooms: getRandomNumber(Rooms.MIN, Rooms.MAX),
+        guests: getRandomNumber(Guests.MIN, Guests.MAX),
+        checkin: getRandomFromArray(CHECKING_TIME),
+        checkout: getRandomFromArray(CHECKOUT_TIME),
+        features: shuffle(FEATURES).slice(0, getRandomNumber(0, FEATURES.length)),
+        description: getRandomFromArray(DESCRIPTIONS),
+        photos: getRandomFromArray(PHOTOS),
       },
       location: {
-        lat: randomNumber(Location.LAT.MIN, Location.LAT.MAX, Location.AFTER_POINT),
-        lng: randomNumber(Location.LNG.MIN, Location.LNG.MAX, Location.AFTER_POINT),
+        lat: getRandomNumber(Location.LAT.MIN, Location.LAT.MAX, Location.AFTER_POINT),
+        lng: getRandomNumber(Location.LNG.MIN, Location.LNG.MAX, Location.AFTER_POINT),
       },
     });
   }
