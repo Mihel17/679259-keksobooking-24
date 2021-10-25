@@ -20,7 +20,7 @@ const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
   });
 };
 
-const mapContainer = document.querySelector('#map-canvas');
+const MAP_CONTAINER = document.querySelector('#map-canvas');
 const CARD_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -40,7 +40,7 @@ const createCard = (array) => {
     card.querySelector('.popup__avatar').src = offer.author.avatar;
 
     // add to html
-    mapContainer.append(card);
+    MAP_CONTAINER.append(card);
   });
 };
 
@@ -48,3 +48,5 @@ document.querySelector('.map__canvas').setAttribute('style', 'display:grid; grid
 // как можно через точечную нотацию задать несколько css свойств
 
 createCard(offers);
+
+export { MAP_CONTAINER };
