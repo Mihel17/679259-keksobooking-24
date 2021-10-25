@@ -44,7 +44,7 @@ const createCard = (array) => {
   });
 };
 
-document.querySelector('.map__canvas').setAttribute('style', 'display:grid; grid-template-columns: repeat(4, 1fr);');
+// document.querySelector('.map__canvas').setAttribute('style', 'display:grid; grid-template-columns: repeat(4, 1fr);');
 // как можно через точечную нотацию задать несколько css свойств
 
 createCard(offers);
