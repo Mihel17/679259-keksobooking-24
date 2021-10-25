@@ -1,1 +1,2 @@
-import { offers } from "./data.js";
+import './create-card.js';
+import './form.js';
