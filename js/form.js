@@ -1,4 +1,4 @@
-import { MAP_CONTAINER } from './create-card.js';
+import { MAP_CONTAINER, createCard } from './create-card.js';
 
 const FORM_ADD = document.querySelector('.ad-form');
 const FILTER = document.querySelector('.map__filters');
@@ -15,6 +15,7 @@ function lockForm(boolean, ...forms) {
       }
     }
   } else {
+    createCard();
     for (const form of forms) {
       form.classList.remove(`${form.classList[0]}--disabled`);
       const formElements = form.children;

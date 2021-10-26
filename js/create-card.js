@@ -25,8 +25,8 @@ const CARD_TEMPLATE = document.querySelector('#card')
   .content
   .querySelector('.popup');
 
-const createCard = (array) => {
-  array.forEach((offer) => {
+const createCard = () => {
+  offers.forEach((offer) => {
     const card = CARD_TEMPLATE.cloneNode(true);
     card.querySelector('.popup__title').textContent = offer.offer.title;
     card.querySelector('.popup__text--address').textContent = offer.offer.address;
@@ -47,6 +47,5 @@ const createCard = (array) => {
 // document.querySelector('.map__canvas').setAttribute('style', 'display:grid; grid-template-columns: repeat(4, 1fr);');
 // как можно через точечную нотацию задать несколько css свойств
 
-createCard(offers);
 
-export { MAP_CONTAINER };
+export { MAP_CONTAINER, createCard };
