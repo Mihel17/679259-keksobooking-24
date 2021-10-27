@@ -10,10 +10,6 @@ const appartmentType = document.querySelector('#type');
 const roomNumber = document.querySelector('#room_number');
 const capacity = Array.from(document.querySelector('#capacity').children);
 
-// capacity.forEach((option) => {
-//   console.log(option.value);
-// });
-
 const AppartmentType = {
   bungalow: 0,
   flat: 1000,
