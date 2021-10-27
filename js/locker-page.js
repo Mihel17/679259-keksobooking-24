@@ -34,6 +34,6 @@ const lockForm = (boolean, ...forms) => {
   }
 };
 
-lockForm(1, filter, formAdd);
+lockForm(0, filter, formAdd);
 
 
