@@ -386,12 +386,26 @@ fieldset {
   border-color: #ffaa99;
 }
 
+.ad-form__element input:valid:hover,
+.ad-form__element select:valid:hover,
+.ad-form__element textarea:valid:hover {
+  border-color: #70ee6494;
+}
+
 .ad-form__element input:focus,
 .ad-form__element select:focus,
 .ad-form__element textarea:focus {
   outline: none;
   -webkit-box-shadow: 0 0 2px 2px #ff6547;
           box-shadow: 0 0 2px 2px #ff6547;
+}
+
+.ad-form__element input:valid:focus,
+.ad-form__element select:valid:focus,
+.ad-form__element textarea:valid:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 2px 2px #34ce2694;
+          box-shadow: 0 0 2px 2px #34ce2694;
 }
 
 .ad-form__element--time {
