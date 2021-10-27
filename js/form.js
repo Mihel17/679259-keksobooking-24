@@ -35,16 +35,13 @@ const onRoomNumberChage = (evt) => {
     const isNecessary = guestNumberValue.some((necessaryValue) => Number(option.value) === necessaryValue ? 1 : 0);
     if (!isNecessary) {
       option.style.display = 'none';
-      option.selected = false;
     }
-
     if (isNecessary) {
       option.selected = true;
     }
   });
 };
 roomNumber.addEventListener('change', onRoomNumberChage);
-
 
 const onAppartmentTypeChange = (evt) => {
   const minPrice = AppartmentType[evt.target.value];
