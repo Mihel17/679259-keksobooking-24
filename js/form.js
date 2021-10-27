@@ -90,6 +90,7 @@ const deleteFormListener = () => {
   appartmentType.removeEventListener('change', onAppartmentTypeChange);
   offerTitle.removeEventListener('input', onOfferTitleInput);
   offerPrice.removeEventListener('input', onOfferPriceInput);
+  roomNumber.removeEventListener('change', onRoomNumberChage);
 };
 
 export { formAdd, filter, deleteFormListener };
