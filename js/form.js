@@ -22,6 +22,10 @@ const RoomsNumber = {
   100: [0],
 };
 
+capacity
+  .filter((option) => !(Number(option.value) === 1))
+  .forEach((option) => option.style.display = 'none');
+
 const onRoomNumberChage = (evt) => {
   const roomNumberValue = evt.target.value;
   const guestNumberValue = RoomsNumber[roomNumberValue];
