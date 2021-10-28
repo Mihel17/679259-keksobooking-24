@@ -1,6 +1,7 @@
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
+const address = formAdd.querySelector('#address');
 const appartmentType = formAdd.querySelector('#type');
 const roomNumber = formAdd.querySelector('#room_number');
 const capacity = Array.from(document.querySelector('#capacity').children);
@@ -58,6 +59,7 @@ const activate = () => {
   formAdd.classList.remove('ad-form--disabled');
   filter.classList.remove('map__filters--disabled');
   setDisabledState();
+  address.readOnly = true;
 };
 
 const deactivate = () => {
@@ -65,6 +67,7 @@ const deactivate = () => {
   formAdd.classList.add('ad-form--disabled');
   filter.classList.add('map__filters--disabled');
   setDisabledState();
+  address.readOnly = false;
 };
 
 // deactivate();
