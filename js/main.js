@@ -1,2 +1,2 @@
 import './create-card.js';
-import './locker-page.js';
+import './form.js';
