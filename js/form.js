@@ -26,18 +26,6 @@ const RoomsNumber = {
   100: [0],
 };
 
-const TimeIn = {
-  '12:00': ['12:00'],
-  '13:00': ['12:00', '13:00'],
-  '14:00': ['12:00', '13:00', '14:00'],
-};
-
-const TimeOut = {
-  '12:00': ['12:00', '13:00', '14:00'],
-  '13:00': ['12:00', '13:00'],
-  '14:00': ['12:00'],
-};
-
 capacity
   .filter((option) => !(Number(option.value) === 1))
   .forEach((option) => option.style.display = 'none');
@@ -58,30 +46,14 @@ const onRoomNumberChage = (evt) => {
 roomNumber.addEventListener('change', onRoomNumberChage);
 
 const onTimeInChange = (evt) => {
-  const valueIn = TimeIn[evt.target.value];
-  timeOutOptions.forEach((option) => {
-    const isNecessary = valueIn.some((necessaryValue) => option.value === necessaryValue ? 1 : 0);
-    if (!isNecessary) {
-      option.style.display = 'none';
-    } else {
-      option.style.display = 'block';
-      option.selected = true;
-    }
-  });
+  timeOutOptions
+    .forEach((item) => item.value === evt.target.value ? item.selected = true : item.style.selected = false);
 };
 timeIn.addEventListener('change', onTimeInChange);
 
 const onTimeOutChange = (evt) => {
-  const valueOut = TimeOut[evt.target.value];
-  timeInOptions.forEach((option) => {
-    const isNecessary = valueOut.some((necessaryValue) => option.value === necessaryValue ? 1 : 0);
-    if (!isNecessary) {
-      option.style.display = 'none';
-    } else {
-      option.style.display = 'block';
-      option.selected = true;
-    }
-  });
+  timeInOptions
+    .forEach((item) => item.value === evt.target.value ? item.selected = true : item.style.selected = false);
 };
 timeOut.addEventListener('change', onTimeOutChange);
 
