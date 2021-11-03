@@ -7,9 +7,7 @@ const roomNumber = formAdd.querySelector('#room_number');
 const capacity = Array.from(document.querySelector('#capacity').children);
 const disabledFilelds = document.querySelectorAll('fieldset, select.map__filter');
 const timeIn = formAdd.querySelector('#timein');
-const timeInOptions = Array.from(formAdd.querySelector('#timein').children);
 const timeOut = formAdd.querySelector('#timeout');
-const timeOutOptions = Array.from(formAdd.querySelector('#timeout').children);
 
 const AppartmentType = {
   bungalow: 0,
@@ -45,15 +43,13 @@ const onRoomNumberChage = (evt) => {
 };
 roomNumber.addEventListener('change', onRoomNumberChage);
 
-const onTimeInChange = (evt) => {
-  timeOutOptions
-    .forEach((item) => item.value === evt.target.value ? item.selected = true : item.style.selected = false);
+const onTimeInChange = () => {
+  timeOut.value = timeIn.value;
 };
 timeIn.addEventListener('change', onTimeInChange);
 
-const onTimeOutChange = (evt) => {
-  timeInOptions
-    .forEach((item) => item.value === evt.target.value ? item.selected = true : item.style.selected = false);
+const onTimeOutChange = () => {
+  timeIn.value = timeOut.value;
 };
 timeOut.addEventListener('change', onTimeOutChange);
 
@@ -90,5 +86,5 @@ const deactivate = () => {
   address.readOnly = false;
 };
 
-// deactivate();
-// activate();
+deactivate();
+activate();
