@@ -23,10 +23,19 @@ L.tileLayer(
 const turnOnMap = () => {
   const markerGroup = L.layerGroup().addTo(map);
   const makeMarker = (offerData) => {
+    const pinIcon = L.icon({
+      iconUrl: '../img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [26, 52],
+    });
+
     const marker = L.marker(
       {
         lat: offerData.location.lat,
         lng: offerData.location.lng,
+      },
+      {
+        icon: pinIcon,
       },
     );
 
@@ -40,7 +49,7 @@ const turnOnMap = () => {
   });
 
   const mainPinIcon = L.icon({
-    iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+    iconUrl: '../img/main-pin.svg',
     iconSize: [52, 52],
     iconAnchor: [26, 52],
   });
@@ -74,7 +83,7 @@ const turnOnMap = () => {
     }, 10);
   });
 
-  markerGroup.clearLayers();
+  // markerGroup.clearLayers();
 };
 
 turnOnMap();
