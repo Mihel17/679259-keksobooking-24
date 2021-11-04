@@ -1,6 +1,11 @@
 import { createCard } from './create-card.js';
 import { offers } from './data.js';
+import { filter } from './form.js';
 const resetBtn = document.querySelector('.ad-form__reset');
+const housingType = document.querySelector('#housing-type');
+const houstingRooms = document.querySelector('#housing-rooms');
+const houstingGuests = document.querySelector('#housing-guests');
+// const houstingPrice = document.querySelector('#housing-price');
 
 const map = L.map('map')
   .on('load', () => {
@@ -44,9 +49,18 @@ const turnOnMap = () => {
       .bindPopup(createCard(offerData));
   };
 
-  offers.forEach((item) => {
-    makeMarker(item);
+  filter.addEventListener('change', () => {
+    markerGroup.clearLayers();
+    offers
+      .filter((item) => housingType[0].value === housingType.value ? item = true : !item || item.offer.type === housingType.value)
+      .filter((item) => houstingRooms[0].value === houstingRooms.value ? item = true : !item || item.offer.rooms === Number(houstingRooms.value))
+      .filter((item) => houstingGuests[0].value === houstingGuests.value ? item = true : !item || item.offer.guests === Number(houstingGuests.value))
+      .forEach((item) => {
+        console.log(item);
+        makeMarker(item);
+      });
   });
+
 
   const mainPinIcon = L.icon({
     iconUrl: '../img/main-pin.svg',
@@ -82,8 +96,6 @@ const turnOnMap = () => {
       lng: 139.745438,
     }, 10);
   });
-
-  // markerGroup.clearLayers();
 };
 
 turnOnMap();

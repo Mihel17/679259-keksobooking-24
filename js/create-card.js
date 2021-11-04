@@ -42,7 +42,7 @@ const createCard = (offer) => {
 
   const price = card.querySelector('.popup__text--price');
   if (offer.offer.price) {
-    price.textContent = `${offer.offer.price}$`;
+    price.textContent = `${offer.offer.price}₽`;
   } else {
     price.remove();
   }

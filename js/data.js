@@ -18,7 +18,9 @@ const DESCRIPTIONS = [
 
 const Price = {
   MIN: 0,
-  MAX: 1000,
+  MAX: 100000,
+  LOW: 10000,
+  HIGH: 50000,
 };
 
 const Location = {
@@ -35,12 +37,12 @@ const Location = {
 
 const Rooms = {
   MIN: 1,
-  MAX: 4,
+  MAX: 3,
 };
 
 const Guests = {
-  MIN: Rooms.MIN,
-  MAX: Rooms.MAX * 2,
+  MIN: 0,
+  MAX: 2,
 };
 
 const offers = [];
@@ -73,4 +75,4 @@ const addOffers = () => {
 
 addOffers();
 
-export { offers };
+export { offers, Price };
