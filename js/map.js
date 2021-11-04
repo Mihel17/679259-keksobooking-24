@@ -57,7 +57,6 @@ const turnOnMap = () => {
       .filter((item) => houstingRooms[0].value === houstingRooms.value ? item = true : !item || item.offer.rooms === Number(houstingRooms.value))
       .filter((item) => houstingGuests[0].value === houstingGuests.value ? item = true : !item || item.offer.guests === Number(houstingGuests.value))
       .forEach((item) => {
-        console.log(item);
         makeMarker(item);
       });
   });
@@ -87,6 +86,7 @@ const turnOnMap = () => {
   });
 
   resetBtn.addEventListener('click', () => {
+    markerGroup.clearLayers();
     mainPinMarker.setLatLng({
       lat: 35.658581,
       lng: 139.745438,
