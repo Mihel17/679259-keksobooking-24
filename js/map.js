@@ -1,6 +1,6 @@
 import { createCard } from './create-card.js';
 import { offers } from './data.js';
-import { filter } from './form.js';
+import { filter, activate } from './form.js';
 const resetBtn = document.querySelector('.ad-form__reset');
 const housingType = document.querySelector('#housing-type');
 const houstingRooms = document.querySelector('#housing-rooms');
@@ -9,6 +9,7 @@ const houstingGuests = document.querySelector('#housing-guests');
 
 const map = L.map('map')
   .on('load', () => {
+    activate();
     console.log('Карта инициализирована');
     // turnOnMap();
   })

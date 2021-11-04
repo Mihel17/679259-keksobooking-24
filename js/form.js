@@ -86,5 +86,7 @@ const deactivate = () => {
   address.readOnly = false;
 };
 
+deactivate();
+
 export { filter, deactivate, activate };
 
