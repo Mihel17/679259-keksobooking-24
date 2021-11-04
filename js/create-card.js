@@ -1,5 +1,3 @@
-import { offers } from './data.js';
-
 const TYPE_TRANSLATE = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -20,7 +18,7 @@ const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
   });
 };
 
-const mapContainer = document.querySelector('#map-canvas');
+const mapContainer = document.querySelector('#map');
 const cardTemplate = document.querySelector('#card')
   .content
   .querySelector('.popup');
@@ -102,8 +100,5 @@ const createCard = (offer) => {
   // add to html
   return card;
 };
-
-mapContainer.append(createCard(offers[1]));
-
 
 export { mapContainer, createCard };
