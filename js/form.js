@@ -1,3 +1,4 @@
+import { onResetBtnClick } from './map.js';
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
@@ -8,7 +9,7 @@ const capacity = Array.from(document.querySelector('#capacity').children);
 const disabledFilelds = document.querySelectorAll('fieldset, select.map__filter');
 const timeIn = formAdd.querySelector('#timein');
 const timeOut = formAdd.querySelector('#timeout');
-
+const resetBtn = document.querySelector('.ad-form__reset');
 const AppartmentType = {
   bungalow: 0,
   flat: 1000,
@@ -16,7 +17,6 @@ const AppartmentType = {
   house: 5000,
   palace: 10000,
 };
-
 const RoomsNumber = {
   1: [1],
   2: [1, 2],
@@ -24,9 +24,11 @@ const RoomsNumber = {
   100: [0],
 };
 
+
 capacity
   .filter((option) => !(Number(option.value) === 1))
   .forEach((option) => option.style.display = 'none');
+
 
 const onRoomNumberChage = (evt) => {
   const roomNumberValue = evt.target.value;
@@ -43,15 +45,18 @@ const onRoomNumberChage = (evt) => {
 };
 roomNumber.addEventListener('change', onRoomNumberChage);
 
+
 const onTimeInChange = () => {
   timeOut.value = timeIn.value;
 };
 timeIn.addEventListener('change', onTimeInChange);
 
+
 const onTimeOutChange = () => {
   timeIn.value = timeOut.value;
 };
 timeOut.addEventListener('change', onTimeOutChange);
+
 
 const onAppartmentTypeChange = (evt) => {
   const minPrice = AppartmentType[evt.target.value];
@@ -60,10 +65,12 @@ const onAppartmentTypeChange = (evt) => {
 };
 appartmentType.addEventListener('change', onAppartmentTypeChange);
 
+
 const deleteFormListener = () => {
   appartmentType.removeEventListener('change', onAppartmentTypeChange);
   roomNumber.removeEventListener('change', onRoomNumberChage);
 };
+
 
 const setDisabledState = () => {
   disabledFilelds.forEach((field) => {
@@ -71,12 +78,14 @@ const setDisabledState = () => {
   });
 };
 
+
 const activate = () => {
   formAdd.classList.remove('ad-form--disabled');
   filter.classList.remove('map__filters--disabled');
-  setDisabledState();
   address.readOnly = true;
 };
+activate();
+
 
 const deactivate = () => {
   deleteFormListener();
@@ -85,8 +94,11 @@ const deactivate = () => {
   setDisabledState();
   address.readOnly = false;
 };
+// deactivate();
 
-deactivate();
 
-export { filter, deactivate, activate };
+resetBtn.addEventListener('click', onResetBtnClick);
+
+
+export { activate, deactivate, address };
 

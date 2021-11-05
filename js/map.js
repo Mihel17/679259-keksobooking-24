@@ -1,102 +1,109 @@
 import { createCard } from './create-card.js';
 import { offers } from './data.js';
-import { filter, activate } from './form.js';
-const resetBtn = document.querySelector('.ad-form__reset');
-const housingType = document.querySelector('#housing-type');
-const houstingRooms = document.querySelector('#housing-rooms');
-const houstingGuests = document.querySelector('#housing-guests');
-// const houstingPrice = document.querySelector('#housing-price');
+import { address } from './form.js';
+const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const TokioLocation = {
+  LAT: 35.658581,
+  LNG: 139.745438,
+};
+const Icon = {
+  MAIN: {
+    WIDTH: 52,
+    HEIGHT: 52,
+  },
+  DEFAULT: {
+    WIDTH: 40,
+    HEIGHT: 40,
+  },
+  ANCHOR: {
+    X: 26,
+    Y: 52,
+  },
+};
+
 
 const map = L.map('map')
   .on('load', () => {
-    activate();
-    console.log('Карта инициализирована');
-    // turnOnMap();
+    // activate();
+    // turnOnMap(); //Карта инициализирована'
   })
   .setView({
-    lat: 35.658581,
-    lng: 139.745438,
+    lat: TokioLocation.LAT,
+    lng: TokioLocation.LNG,
   }, 10);
-
 L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  LINK_OPEN_MAP,
   {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    attribution: COPY_OPEN_MAP,
   },
 ).addTo(map);
+const markerGroup = L.layerGroup().addTo(map);
 
 
-const turnOnMap = () => {
-  const markerGroup = L.layerGroup().addTo(map);
-  const makeMarker = (offerData) => {
-    const pinIcon = L.icon({
-      iconUrl: '../img/pin.svg',
-      iconSize: [40, 40],
-      iconAnchor: [26, 52],
-    });
+// const addMainMarker = () => {
+const mainPinIcon = L.icon({
+  iconUrl: '../img/main-pin.svg',
+  iconSize: [Icon.MAIN.WIDTH, Icon.MAIN.HEIGHT],
+  iconAnchor: [Icon.ANCHOR.X, Icon.ANCHOR.Y],
+});
+const mainPinMarker = L.marker(
+  {
+    lat: TokioLocation.LAT,
+    lng: TokioLocation.LNG,
+  },
+  {
+    draggable: true,
+    icon: mainPinIcon,
+  },
+);
+mainPinMarker.addTo(map);
+mainPinMarker.on('moveend', (evt) => {
+  address.value = evt.target.getLatLng();
+});
+// };
 
-    const marker = L.marker(
-      {
-        lat: offerData.location.lat,
-        lng: offerData.location.lng,
-      },
-      {
-        icon: pinIcon,
-      },
-    );
 
-    marker
-      .addTo(markerGroup)
-      .bindPopup(createCard(offerData));
-  };
-
-  filter.addEventListener('change', () => {
-    markerGroup.clearLayers();
-    offers
-      .filter((item) => housingType[0].value === housingType.value ? item = true : !item || item.offer.type === housingType.value)
-      .filter((item) => houstingRooms[0].value === houstingRooms.value ? item = true : !item || item.offer.rooms === Number(houstingRooms.value))
-      .filter((item) => houstingGuests[0].value === houstingGuests.value ? item = true : !item || item.offer.guests === Number(houstingGuests.value))
-      .forEach((item) => {
-        makeMarker(item);
-      });
+// const turnOnMap = () => {
+const addMarkers = (offerData) => {
+  const pinIcon = L.icon({
+    iconUrl: '../img/pin.svg',
+    iconSize: [Icon.DEFAULT.WIDTH, Icon.DEFAULT.HEIGHT],
+    iconAnchor: [Icon.ANCHOR.X, Icon.ANCHOR.Y],
   });
-
-
-  const mainPinIcon = L.icon({
-    iconUrl: '../img/main-pin.svg',
-    iconSize: [52, 52],
-    iconAnchor: [26, 52],
-  });
-
-  const mainPinMarker = L.marker(
+  const marker = L.marker(
     {
-      lat: 35.658581,
-      lng: 139.745438,
+      lat: offerData.location.lat,
+      lng: offerData.location.lng,
     },
     {
-      draggable: true,
-      icon: mainPinIcon,
+      icon: pinIcon,
     },
   );
+  marker
+    .addTo(markerGroup)
+    .bindPopup(createCard(offerData));
+};
+offers.forEach((item) => {
+  addMarkers(item);
+});
+// addMainMarker();
+// };
+// turnOnMap();
 
-  mainPinMarker.addTo(map);
 
-  mainPinMarker.on('moveend', (evt) => {
-    console.log(evt.target.getLatLng());
+const onResetBtnClick = () => {
+  markerGroup.clearLayers();
+  mainPinMarker.setLatLng({
+    lat: TokioLocation.LAT,
+    lng: TokioLocation.LNG,
   });
-
-  resetBtn.addEventListener('click', () => {
-    markerGroup.clearLayers();
-    mainPinMarker.setLatLng({
-      lat: 35.658581,
-      lng: 139.745438,
-    });
-
-    map.setView({
-      lat: 35.658581,
-      lng: 139.745438,
-    }, 10);
-  });
+  map.setView({
+    lat: TokioLocation.LAT,
+    lng: TokioLocation.LNG,
+  }, 10);
 };
 
-turnOnMap();
+
+export { onResetBtnClick };
+

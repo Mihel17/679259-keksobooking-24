@@ -5,6 +5,11 @@ const TYPE_TRANSLATE = {
   palace: 'Дворец',
   hotel: 'Отель',
 };
+const mapContainer = document.querySelector('#map');
+const cardTemplate = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
+
 
 const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
   const collectionItems = containerClass.querySelectorAll('.popup__feature');
@@ -18,10 +23,6 @@ const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
   });
 };
 
-const mapContainer = document.querySelector('#map');
-const cardTemplate = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
 
 const createCard = (offer) => {
   const card = cardTemplate.cloneNode(true);
@@ -96,9 +97,8 @@ const createCard = (offer) => {
   } else {
     avatar.remove();
   }
-
-  // add to html
   return card;
 };
+
 
 export { mapContainer, createCard };
