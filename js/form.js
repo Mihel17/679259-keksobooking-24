@@ -1,4 +1,3 @@
-import { onResetBtnClick } from './map.js';
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
@@ -43,19 +42,16 @@ const onRoomNumberChage = (evt) => {
     }
   });
 };
-roomNumber.addEventListener('change', onRoomNumberChage);
 
 
 const onTimeInChange = () => {
   timeOut.value = timeIn.value;
 };
-timeIn.addEventListener('change', onTimeInChange);
 
 
 const onTimeOutChange = () => {
   timeIn.value = timeOut.value;
 };
-timeOut.addEventListener('change', onTimeOutChange);
 
 
 const onAppartmentTypeChange = (evt) => {
@@ -63,16 +59,25 @@ const onAppartmentTypeChange = (evt) => {
   offerPrice.min = minPrice;
   offerPrice.placeholder = minPrice;
 };
-appartmentType.addEventListener('change', onAppartmentTypeChange);
+
+
+const addFormListener = () => {
+  appartmentType.addEventListener('change', onAppartmentTypeChange);
+  roomNumber.addEventListener('change', onRoomNumberChage);
+  timeIn.addEventListener('change', onTimeInChange);
+  timeOut.addEventListener('change', onTimeOutChange);
+};
 
 
 const deleteFormListener = () => {
   appartmentType.removeEventListener('change', onAppartmentTypeChange);
   roomNumber.removeEventListener('change', onRoomNumberChage);
+  timeIn.removeEventListener('change', onTimeInChange);
+  timeOut.removeEventListener('change', onTimeOutChange);
 };
 
 
-const setDisabledState = () => {
+const setState = () => {
   disabledFilelds.forEach((field) => {
     field.disabled = !field.disabled;
   });
@@ -80,25 +85,23 @@ const setDisabledState = () => {
 
 
 const activate = () => {
+  addFormListener();
+  setState();
   formAdd.classList.remove('ad-form--disabled');
   filter.classList.remove('map__filters--disabled');
   address.readOnly = true;
 };
-activate();
 
 
 const deactivate = () => {
   deleteFormListener();
+  setState();
   formAdd.classList.add('ad-form--disabled');
   filter.classList.add('map__filters--disabled');
-  setDisabledState();
   address.readOnly = false;
 };
-// deactivate();
+deactivate();
 
 
-resetBtn.addEventListener('click', onResetBtnClick);
-
-
-export { activate, deactivate, address };
+export { activate, resetBtn, address };
 
