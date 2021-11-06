@@ -99,6 +99,7 @@ const resetMap = () => {
     lat: TokioLocation.LAT,
     lng: TokioLocation.LNG,
   }, 10);
+  turnOnMap();
 };
 resetBtn.addEventListener('click', resetMap);
 
