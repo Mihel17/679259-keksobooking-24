@@ -1,5 +1,6 @@
 import { createCard } from './create-card.js';
-import { offers } from './data.js';
+// import { offers } from './data.js';
+import { request } from './request.js';
 import { activate, resetBtn, address } from './form.js';
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -44,7 +45,7 @@ const mainPinMarker = L.marker(
 );
 
 
-const turnOnMap = () => {
+const turnOnMap = (dataList) => {
   mainPinMarker.addTo(map);
   mainPinMarker.on('moveend', (evt) => {
     address.value = evt.target.getLatLng();
@@ -68,25 +69,32 @@ const turnOnMap = () => {
       .addTo(markerGroup)
       .bindPopup(createCard(offerData));
   };
-  offers.forEach((item) => {
-    addMarkers(item);
-  });
+  // dataList.forEach((item) => {
+  //   console.log(item);
+  //   addMarkers(item);
+  // });
+  for (let i = 0; i < 3; i++) {
+    console.log(dataList[i]);
+    addMarkers(dataList[i]);
+  }
 };
 
 
-map.on('load', () => {
-  activate();
-  turnOnMap();
-}).setView({
-  lat: TokioLocation.LAT,
-  lng: TokioLocation.LNG,
-}, 10);
-L.tileLayer(
-  LINK_OPEN_MAP,
-  {
-    attribution: COPY_OPEN_MAP,
-  },
-).addTo(map);
+const mapLoading = (data) => {
+  map.on('load', () => {
+    activate();
+    turnOnMap(data);
+  }).setView({
+    lat: TokioLocation.LAT,
+    lng: TokioLocation.LNG,
+  }, 10);
+  L.tileLayer(
+    LINK_OPEN_MAP,
+    {
+      attribution: COPY_OPEN_MAP,
+    },
+  ).addTo(map);
+};
 
 
 const resetMap = () => {
@@ -103,4 +111,18 @@ const resetMap = () => {
 };
 resetBtn.addEventListener('click', resetMap);
 
+
+let offers = [];
+
+const onSuccess = (data) => {
+  offers = data.slice();
+  mapLoading(offers);
+};
+
+const onFail = (err) => {
+  alert(err);
+};
+
+
+request(onSuccess, onFail, 'GET');
 

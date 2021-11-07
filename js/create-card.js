@@ -72,8 +72,12 @@ const createCard = (offer) => {
 
   const features = card.querySelector('.popup__features');
   if (!offer.offer.features.length <= 0) {
+    console.log('features added', !offer.offer.features.length <= 0);
+
     deleteUnnecessaryElements(features, offer.offer.features);
   } else {
+    console.log('features added', !offer.offer.features.length <= 0);
+
     features.remove();
   }
 
