@@ -1,5 +1,3 @@
-import { offers } from './data.js';
-
 const TYPE_TRANSLATE = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -7,6 +5,11 @@ const TYPE_TRANSLATE = {
   palace: 'Дворец',
   hotel: 'Отель',
 };
+const mapContainer = document.querySelector('#map');
+const cardTemplate = document.querySelector('#card')
+  .content
+  .querySelector('.popup');
+
 
 const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
   const collectionItems = containerClass.querySelectorAll('.popup__feature');
@@ -20,10 +23,6 @@ const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
   });
 };
 
-const mapContainer = document.querySelector('#map-canvas');
-const cardTemplate = document.querySelector('#card')
-  .content
-  .querySelector('.popup');
 
 const createCard = (offer) => {
   const card = cardTemplate.cloneNode(true);
@@ -44,7 +43,7 @@ const createCard = (offer) => {
 
   const price = card.querySelector('.popup__text--price');
   if (offer.offer.price) {
-    price.textContent = `${offer.offer.price}$`;
+    price.textContent = `${offer.offer.price}₽`;
   } else {
     price.remove();
   }
@@ -98,12 +97,8 @@ const createCard = (offer) => {
   } else {
     avatar.remove();
   }
-
-  // add to html
   return card;
 };
-
-mapContainer.append(createCard(offers[1]));
 
 
 export { mapContainer, createCard };

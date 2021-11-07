@@ -1,5 +1,4 @@
 import { getRandomNumber, getRandomFromArray, shuffle } from './utils/get-random.js';
-
 const OFFERS_COUNT = 10;
 const TITLES = ['Vista Sunrise Apartments', 'CASA BELLA', 'Chaparral Apartments', '8th And Wake', 'Casa Bonita', 'Villa Anaheim', '238 Termino', 'Artthaus Studios', 'Reflections At Wyandotte', 'Rosewood Park'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -15,12 +14,12 @@ const DESCRIPTIONS = [
   'The presence of numerous amenities in this apartment will allow guests to feel at home. Near the house there are two supermarkets, Yalchin Market and WILLMART. The city center can be reached in 7 - 10 minutes or on foot in 20 - 30 minutes.',
   'Cozy bright studio with sea views on the 24th floor of the Real Palace residential complex, located on ul. Pirosmani in an area with developed infrastructure. The apartment can accommodate no more than 3 adult guests or two adults and one child: a bed for two people and a folding chair for one.',
 ];
-
 const Price = {
   MIN: 0,
-  MAX: 1000,
+  MAX: 100000,
+  LOW: 10000,
+  HIGH: 50000,
 };
-
 const Location = {
   LAT: {
     MIN: 35.65000,
@@ -32,16 +31,15 @@ const Location = {
   },
   AFTER_POINT: 5,
 };
-
 const Rooms = {
   MIN: 1,
-  MAX: 4,
+  MAX: 3,
+};
+const Guests = {
+  MIN: 0,
+  MAX: 2,
 };
 
-const Guests = {
-  MIN: Rooms.MIN,
-  MAX: Rooms.MAX * 2,
-};
 
 const offers = [];
 const addOffers = () => {
@@ -70,7 +68,7 @@ const addOffers = () => {
     });
   }
 };
-
 addOffers();
 
-export { offers };
+
+export { offers, Price };
