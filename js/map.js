@@ -1,7 +1,7 @@
 import { createCard } from './create-card.js';
 // import { offers } from './data.js';
 import { request } from './request.js';
-import { activate, resetBtn, address } from './form.js';
+import { activate, resetBtn, address, form } from './form.js';
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TokioLocation = {
@@ -123,6 +123,14 @@ const onFail = (err) => {
   alert(err);
 };
 
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  request(
+    onSuccess(),
+    onFail('Не удалось отправить форму. Попробуйте ещё раз'),
+    new FormData(evt.target),
+  );
+});
 
 request(onSuccess, onFail, 'GET');
 

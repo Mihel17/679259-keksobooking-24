@@ -9,6 +9,7 @@ const disabledFilelds = document.querySelectorAll('fieldset, select.map__filter'
 const timeIn = formAdd.querySelector('#timein');
 const timeOut = formAdd.querySelector('#timeout');
 const resetBtn = document.querySelector('.ad-form__reset');
+const form = document.querySelector('.ad-form__submit');
 const AppartmentType = {
   bungalow: 0,
   flat: 1000,
@@ -102,6 +103,5 @@ const deactivate = () => {
 };
 deactivate();
 
-
-export { activate, resetBtn, address };
+export { activate, resetBtn, address, form };
 
