@@ -109,8 +109,9 @@ deactivate();
 formAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
   request(
-    showSuccessModal(),
-    showErrorModal(),
+    showSuccessModal,
+    showErrorModal,
+    'POST',
     new FormData(evt.target),
   );
 });
