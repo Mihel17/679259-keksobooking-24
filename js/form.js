@@ -1,3 +1,6 @@
+import { request } from './request.js';
+import { showSuccessModal, showErrorModal } from './modal.js';
+
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
@@ -9,7 +12,6 @@ const disabledFilelds = document.querySelectorAll('fieldset, select.map__filter'
 const timeIn = formAdd.querySelector('#timein');
 const timeOut = formAdd.querySelector('#timeout');
 const resetBtn = document.querySelector('.ad-form__reset');
-const form = document.querySelector('.ad-form__submit');
 const AppartmentType = {
   bungalow: 0,
   flat: 1000,
@@ -103,5 +105,16 @@ const deactivate = () => {
 };
 deactivate();
 
-export { activate, resetBtn, address, form };
+
+formAdd.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  request(
+    showSuccessModal(),
+    showErrorModal(),
+    new FormData(evt.target),
+  );
+});
+
+
+export { activate, resetBtn, address, formAdd };
 
