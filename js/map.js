@@ -47,7 +47,9 @@ const mainPinMarker = L.marker(
 const turnOnMap = (dataList) => {
   mainPinMarker.addTo(map);
   mainPinMarker.on('moveend', (evt) => {
-    address.value = evt.target.getLatLng();
+    const LOCATION_AFTER_POINT = 5;
+    const location = evt.target.getLatLng();
+    address.value = `${location.lat.toFixed(LOCATION_AFTER_POINT)}, ${location.lng.toFixed(LOCATION_AFTER_POINT)}`;
   });
   const addMarkers = (offerData) => {
     const pinIcon = L.icon({
