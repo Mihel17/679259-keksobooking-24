@@ -12,7 +12,7 @@ const showSuccessModal = () => {
   const modal = modalSuccess.cloneNode(true);
   body.append(modal);
   window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' || evt.key === ' ' || evt.key === 'Enter') {
+    if (evt.key === 'Escape') {
       modal.remove();
     }
   }, { once: true });
