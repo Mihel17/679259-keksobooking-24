@@ -68,14 +68,9 @@ const turnOnMap = (dataList) => {
       .addTo(markerGroup)
       .bindPopup(createCard(offerData));
   };
-  // dataList.forEach((item) => {
-  //   console.log(item);
-  //   addMarkers(item);
-  // });
-  for (let i = 0; i < 3; i++) {
-    console.log(dataList[i]);
-    addMarkers(dataList[i]);
-  }
+  dataList.forEach((item) => {
+    addMarkers(item);
+  });
 };
 
 
