@@ -22,8 +22,8 @@ const request = (onSuccess, onFail, method, body) => {
     .then((data) => {
       onSuccess(data);
     })
-    .catch((err) => {
-      onFail(err);
+    .catch(() => {
+      onFail('Не удалось отправить форму. Попробуйте ещё раз');
     });
 };
 
