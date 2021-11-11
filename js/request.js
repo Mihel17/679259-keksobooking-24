@@ -12,13 +12,7 @@ const request = (onSuccess, onFail, method, body) => {
       body: body,
     },
   )
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
-      }
-    })
+    .then((response) => response.json())
     .then((data) => {
       onSuccess(data);
     })

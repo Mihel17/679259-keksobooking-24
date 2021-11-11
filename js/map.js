@@ -1,6 +1,6 @@
 import { createCard } from './create-card.js';
 import { request } from './request.js';
-import { activate, resetBtn, address } from './form.js';
+import { activate, resetBtn, address, resetAddForm } from './form.js';
 import { showAlert } from './utils/show-alert.js';
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -94,8 +94,7 @@ const mapLoading = (data) => {
 };
 
 
-const resetMap = () => {
-  // markerGroup.clearLayers();
+const reset = () => {
   mainPinMarker.setLatLng({
     lat: TokioLocation.LAT,
     lng: TokioLocation.LNG,
@@ -104,9 +103,9 @@ const resetMap = () => {
     lat: TokioLocation.LAT,
     lng: TokioLocation.LNG,
   }, 10);
-  turnOnMap();
+  resetAddForm();
 };
-resetBtn.addEventListener('click', resetMap);
+resetBtn.addEventListener('click', reset);
 
 
 let offers = [];

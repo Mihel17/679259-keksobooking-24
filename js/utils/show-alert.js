@@ -1,25 +1,42 @@
-const ALERT_SHOW_TIME = 1000;
+const ALERT_SHOW_TIME = 4000;
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
-  alertContainer.style.position = 'absolute';
+  alertContainer.style.zIndex = 401;
+  alertContainer.style.position = 'fixed';
   alertContainer.style.left = 0;
   alertContainer.style.top = 0;
   alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'white';
+  alertContainer.style.bottom = 0;
+  alertContainer.style.backgroundColor = 'black';
+  alertContainer.style.opacity = '0.5';
 
-  alertContainer.textContent = message;
+  const messageBlock = document.createElement('div');
+  messageBlock.style.zIndex = 402;
+  messageBlock.style.width = '80%';
+  messageBlock.style.height = 'max-content';
+  messageBlock.style.position = 'fixed';
+  messageBlock.style.left = 0;
+  messageBlock.style.top = 0;
+  messageBlock.style.right = 0;
+  messageBlock.style.bottom = 0;
+  messageBlock.style.margin = 'auto auto';
+  messageBlock.style.padding = '10px 5px';
+  messageBlock.style.fontSize = '30px';
+  messageBlock.style.textAlign = 'center';
+  messageBlock.style.backgroundColor = 'white';
+  messageBlock.style.borderRadius = '10px';
 
-  document.body.append(alertContainer);
+  messageBlock.textContent = message;
+
+  document.body.append(alertContainer, messageBlock);
 
   setTimeout(() => {
     alertContainer.remove();
+    messageBlock.remove();
   }, ALERT_SHOW_TIME);
 };
+
 
 export { showAlert };
 

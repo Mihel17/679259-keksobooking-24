@@ -1,3 +1,4 @@
+import { formAdd, resetAddForm } from './form.js';
 const body = document.querySelector('body');
 const modalSuccess = body.querySelector('#success')
   .content
@@ -11,6 +12,8 @@ const modalError = body.querySelector('#error')
 const showSuccessModal = () => {
   const modal = modalSuccess.cloneNode(true);
   body.append(modal);
+  formAdd.reset();
+  resetAddForm();
   window.addEventListener('keydown', (evt) => {
     if (evt.key === 'Escape') {
       modal.remove();

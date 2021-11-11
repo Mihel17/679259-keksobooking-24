@@ -1,5 +1,6 @@
 import { request } from './request.js';
 import { showSuccessModal, showErrorModal } from './modal.js';
+import { showAlert } from './utils/show-alert.js';
 
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
@@ -106,16 +107,38 @@ const deactivate = () => {
 deactivate();
 
 
+const checkValidity = () => {
+  let bool = false;
+  if (!address.value) {
+    showAlert('Укажите расположение ваших апартаментов, передвигая красный маркера на карте');
+    scrollTo(0, 0);
+    bool = false;
+  } else {
+    bool = true;
+  }
+  return bool;
+};
+
+
 formAdd.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  request(
-    showSuccessModal,
-    showErrorModal,
-    'POST',
-    new FormData(evt.target),
-  );
+  if (checkValidity()) {
+    request(
+      showSuccessModal,
+      showErrorModal,
+      'POST',
+      new FormData(evt.target),
+    );
+  }
 });
 
 
-export { activate, resetBtn, address, formAdd };
+const resetAddForm = () => {
+  const price = AppartmentType[appartmentType[1].value];
+  offerPrice.min = price;
+  offerPrice.placeholder = price;
+};
+
+
+export { activate, resetBtn, address, formAdd, resetAddForm };
 
