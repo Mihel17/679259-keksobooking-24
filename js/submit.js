@@ -1,4 +1,6 @@
-import { formAdd, resetAddForm } from './form.js';
+import { request } from './request.js';
+import { reset } from './map.js';
+import { formAdd, resetAddForm, checkValidity } from './form.js';
 const body = document.querySelector('body');
 const modalSuccess = body.querySelector('#success')
   .content
@@ -43,5 +45,26 @@ const showErrorModal = () => {
 };
 
 
-export { showSuccessModal, showErrorModal };
+const submitOnSuccess = () => {
+  showSuccessModal();
+  reset();
+};
 
+
+const submitOnErrror = () => {
+  showErrorModal();
+};
+
+
+const onformAddSubmit = (evt) => {
+  evt.preventDefault();
+  if (checkValidity()) {
+    request(
+      submitOnSuccess,
+      submitOnErrror,
+      'POST',
+      new FormData(evt.target),
+    );
+  }
+};
+formAdd.addEventListener('submit', onformAddSubmit);

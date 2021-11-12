@@ -1,7 +1,5 @@
 import { createCard } from './create-card.js';
-import { request } from './request.js';
 import { activate, resetBtn, address, resetAddForm } from './form.js';
-import { showAlert } from './utils/show-alert.js';
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TokioLocation = {
@@ -108,14 +106,6 @@ const reset = () => {
 resetBtn.addEventListener('click', reset);
 
 
-let offers = [];
-const onSuccess = (data) => {
-  offers = data.slice();
-  mapLoading(offers);
-};
-const onFail = (err) => {
-  showAlert(err);
-};
+export { reset, mapLoading };
 
-request(onSuccess, onFail, 'GET');
 

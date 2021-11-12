@@ -1,7 +1,4 @@
-import { request } from './request.js';
-import { showSuccessModal, showErrorModal } from './modal.js';
 import { showAlert } from './utils/show-alert.js';
-
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
@@ -120,19 +117,6 @@ const checkValidity = () => {
 };
 
 
-formAdd.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  if (checkValidity()) {
-    request(
-      showSuccessModal,
-      showErrorModal,
-      'POST',
-      new FormData(evt.target),
-    );
-  }
-});
-
-
 const resetAddForm = () => {
   const price = AppartmentType[appartmentType[1].value];
   offerPrice.min = price;
@@ -140,5 +124,5 @@ const resetAddForm = () => {
 };
 
 
-export { activate, resetBtn, address, formAdd, resetAddForm };
+export { resetBtn, address, formAdd, activate, resetAddForm, checkValidity };
 
