@@ -35,6 +35,11 @@ const showAlert = (message) => {
     alertContainer.remove();
     messageBlock.remove();
   }, ALERT_SHOW_TIME);
+
+  window.addEventListener('click', () => {
+    alertContainer.remove();
+    messageBlock.remove();
+  }, { once: true });
 };
 
 
