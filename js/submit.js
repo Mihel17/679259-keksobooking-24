@@ -1,5 +1,5 @@
 import { request } from './request.js';
-import { reset } from './map.js';
+import { reset, map } from './map.js';
 import { formAdd, resetAddForm, checkValidity } from './form.js';
 const body = document.querySelector('body');
 const modalSuccess = body.querySelector('#success')
@@ -48,6 +48,7 @@ const showErrorModal = () => {
 const submitOnSuccess = () => {
   showSuccessModal();
   reset();
+  map.closePopup();
 };
 
 

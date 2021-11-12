@@ -106,6 +106,6 @@ const reset = () => {
 resetBtn.addEventListener('click', reset);
 
 
-export { reset, mapLoading };
+export { reset, mapLoading, map };
 
 
