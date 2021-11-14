@@ -23,16 +23,30 @@ const filterRules = {
   'housing-price': (data, filter) => priceMap[filter.value].FROM < data.offer.price && priceMap[filter.value].TO > data.offer.price,
   'housing-rooms': (data, filter) => filter.value === String(data.offer.rooms),
   'housing-guests': (data, filter) => filter.value === String(data.offer.guests),
+  //   'housing-features': (data, filter) => {
+  //     const activeCheckboxes = Array.from(filter.querySelectorAll('input[type="checkbox"]:checked'));
+  //     return activeCheckboxes.every((checkbox) =>
+  //       (data.offer.features.some((feature) => feature === checkbox.value)));
+  //   },
+  // };
+
   'housing-features': (data, filter) => {
     const activeCheckboxes = Array.from(filter.querySelectorAll('input[type="checkbox"]:checked'));
 
-    //===================
-    console.log('activeCheckboxes', activeCheckboxes);
-    //===================
+    return activeCheckboxes.every((checkbox) => {
+      data.offer.features.some((feature) => {
 
-    return activeCheckboxes.every((checkbox) =>
-      (data.offer.features.some((feature) => feature === checkbox.value)));
+        //===================
+        console.log('data-features-value / checkbox-features-value', '|||', feature, '/', checkbox.value, '|||', feature === checkbox.valu);
+        //===================
+
+        return feature === checkbox.valu;
+      });
+
+    });
   },
+
+
 };
 
 
