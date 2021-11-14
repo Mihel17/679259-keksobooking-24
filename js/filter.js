@@ -1,4 +1,4 @@
-import { turnOnMap } from './map.js';
+import { turnOnMap, removeMarkers } from './map.js';
 const MAX_OFFERS = 10;
 const DEFAULT_VALUE = 'any';
 const priceMap = {
@@ -46,7 +46,7 @@ const filterData = (data) => {
       console.log(filter.value, DEFAULT_VALUE, filter.value === DEFAULT_VALUE);
       //=================
 
-      filter.value === DEFAULT_VALUE ? true : filterRules[filter.id](data[i], filter);
+      return filter.value === DEFAULT_VALUE ? true : filterRules[filter.id](data[i], filter);
     });
 
     console.log(result);
@@ -59,6 +59,7 @@ const filterData = (data) => {
     console.log(filterOffers);
     //=================
   }
+  removeMarkers();
   turnOnMap(filterOffers);
 };
 
