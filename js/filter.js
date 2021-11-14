@@ -37,7 +37,7 @@ const filterRules = {
       data.offer.features.some((feature) => {
 
         //===================
-        console.log('data-features-value / checkbox-features-value', '|||', feature, '/', checkbox.value, '|||', feature === checkbox.valu);
+        console.log('data-value / checkbox-value', '|||', feature, '/', checkbox.value, '|||', feature === checkbox.valu);
         //===================
 
         return feature === checkbox.valu;
