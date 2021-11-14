@@ -19,12 +19,8 @@ const filters = Array.from(document.querySelector('.map__filters').children);
 
 
 const filterRules = {
-  'housing-type': (data, filter) => {
-    console.log(filter.value, data.offer.type, filter.value === data.offer.type);
-    return filter.value === data.offer.type;
-  },
-  'housing-price': (data, filter) =>
-    (priceMap[filter.value].FROM === data.offer.price && priceMap[filter.value].TO > data.offer.price),
+  'housing-type': (data, filter) => filter.value === data.offer.type,
+  'housing-price': (data, filter) => priceMap[filter.value].FROM < data.offer.price && priceMap[filter.value].TO > data.offer.price,
   'housing-rooms': (data, filter) => filter.value === String(data.offer.rooms),
   'housing-guests': (data, filter) => filter.value === String(data.offer.guests),
   'housing-features': (data, filter) => {
@@ -54,10 +50,6 @@ const filterData = (data) => {
     if (result) {
       filterOffers.push(data[i]);
     }
-
-    //=================
-    console.log(filterOffers);
-    //=================
   }
   removeMarkers();
   turnOnMap(filterOffers);
