@@ -21,7 +21,7 @@ const filters = Array.from(document.querySelector('.map__filters').children);
 const filterRules = {
   'housing-type': (data, filter) => {
     console.log(filter.value, data.offer.type, filter.value === data.offer.type);
-    filter.value === data.offer.type;
+    return filter.value === data.offer.type;
   },
   'housing-price': (data, filter) =>
     (priceMap[filter.value].FROM === data.offer.price && priceMap[filter.value].TO > data.offer.price),
@@ -48,6 +48,8 @@ const filterData = (data) => {
 
       filter.value === DEFAULT_VALUE ? true : filterRules[filter.id](data[i], filter);
     });
+
+    console.log(result);
 
     if (result) {
       filterOffers.push(data[i]);
