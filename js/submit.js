@@ -1,6 +1,7 @@
 import { request } from './request.js';
 import { reset, map } from './map.js';
 import { formAdd, resetAddForm } from './form.js';
+const ESCAPE = 'Escape';
 const body = document.querySelector('body');
 const modalSuccess = body.querySelector('#success')
   .content
@@ -17,7 +18,7 @@ const showSuccessModal = () => {
   formAdd.reset();
   resetAddForm();
   window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+    if (evt.key === ESCAPE) {
       modal.remove();
     }
   }, { once: true });
@@ -35,7 +36,7 @@ const showErrorModal = () => {
     modal.remove();
   }, { once: true });
   window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
+    if (evt.key === ESCAPE) {
       modal.remove();
     }
   }, { once: true });
