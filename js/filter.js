@@ -25,6 +25,11 @@ const filterRules = {
   'housing-guests': (data, filter) => filter.value === String(data.offer.guests),
   'housing-features': (data, filter) => {
     const activeCheckboxes = Array.from(filter.querySelectorAll('input[type="checkbox"]:checked'));
+
+    //===================
+    console.log('activeCheckboxes', activeCheckboxes);
+    //===================
+
     return activeCheckboxes.every((checkbox) =>
       (data.offer.features.some((feature) => feature === checkbox.value)));
   },
@@ -35,17 +40,7 @@ const filterData = (data) => {
   const filterOffers = [];
 
   for (let i = 0; i < data.length && filterOffers.length < MAX_OFFERS; i++) {
-    const result = filters.every((filter) => {
-
-      //=================
-      console.log(i);
-      console.log(filter.value, DEFAULT_VALUE, filter.value === DEFAULT_VALUE);
-      //=================
-
-      return filter.value === DEFAULT_VALUE ? true : filterRules[filter.id](data[i], filter);
-    });
-
-    console.log(result);
+    const result = filters.every((filter) => filter.value === DEFAULT_VALUE ? true : filterRules[filter.id](data[i], filter));
 
     if (result) {
       filterOffers.push(data[i]);
