@@ -1,6 +1,6 @@
 import { request } from './request.js';
 import { reset, map } from './map.js';
-import { formAdd, resetAddForm, checkValidity } from './form.js';
+import { formAdd, resetAddForm } from './form.js';
 const body = document.querySelector('body');
 const modalSuccess = body.querySelector('#success')
   .content
@@ -59,13 +59,11 @@ const submitOnErrror = () => {
 
 const onformAddSubmit = (evt) => {
   evt.preventDefault();
-  if (checkValidity()) {
-    request(
-      submitOnSuccess,
-      submitOnErrror,
-      'POST',
-      new FormData(evt.target),
-    );
-  }
+  request(
+    submitOnSuccess,
+    submitOnErrror,
+    'POST',
+    new FormData(evt.target),
+  );
 };
 formAdd.addEventListener('submit', onformAddSubmit);

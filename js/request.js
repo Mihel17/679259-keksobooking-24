@@ -12,7 +12,12 @@ const request = (onSuccess, onFail, method, body) => {
       body: body,
     },
   )
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
     .then((data) => {
       onSuccess(data);
     })

@@ -1,5 +1,6 @@
 import { createCard } from './create-card.js';
 import { activate, resetBtn, address, resetAddForm } from './form.js';
+const LOCATION_AFTER_POINT = 5;
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TokioLocation = {
@@ -20,6 +21,9 @@ const Icon = {
     Y: 52,
   },
 };
+
+
+address.value = `${TokioLocation.LAT}, ${TokioLocation.LNG}`;
 
 
 const map = L.map('map');
@@ -46,7 +50,6 @@ const mainPinMarker = L.marker(
 const turnOnMap = (dataList) => {
   mainPinMarker.addTo(map);
   mainPinMarker.on('moveend', (evt) => {
-    const LOCATION_AFTER_POINT = 5;
     const location = evt.target.getLatLng();
     address.value = `${location.lat.toFixed(LOCATION_AFTER_POINT)}, ${location.lng.toFixed(LOCATION_AFTER_POINT)}`;
   });
@@ -102,6 +105,7 @@ const reset = () => {
     lng: TokioLocation.LNG,
   }, 10);
   resetAddForm();
+  address.value = `${TokioLocation.LAT}, ${TokioLocation.LNG}`;
 };
 resetBtn.addEventListener('click', reset);
 

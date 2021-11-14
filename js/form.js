@@ -1,4 +1,3 @@
-import { showAlert } from './utils/show-alert.js';
 const formAdd = document.querySelector('.ad-form');
 const filter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
@@ -104,19 +103,6 @@ const deactivate = () => {
 deactivate();
 
 
-const checkValidity = () => {
-  let bool = false;
-  if (!address.value) {
-    showAlert('Укажите расположение ваших апартаментов, передвигая красный маркера на карте');
-    scrollTo(0, 0);
-    bool = false;
-  } else {
-    bool = true;
-  }
-  return bool;
-};
-
-
 const resetAddForm = () => {
   const price = AppartmentType[appartmentType[1].value];
   offerPrice.min = price;
@@ -124,5 +110,5 @@ const resetAddForm = () => {
 };
 
 
-export { resetBtn, address, formAdd, activate, resetAddForm, checkValidity };
+export { resetBtn, address, formAdd, activate, resetAddForm };
 
