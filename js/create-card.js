@@ -26,6 +26,8 @@ const deleteUnnecessaryElements = (containerClass, necessaryElements) => {
 
 const createCard = (offer) => {
   const card = cardTemplate.cloneNode(true);
+  const photoTemplate = card.querySelector('.popup__photo');
+  const popupPhotos = card.querySelector('.popup__photos');
 
   const title = card.querySelector('.popup__title');
   if (offer.offer.title) {
@@ -71,7 +73,7 @@ const createCard = (offer) => {
   }
 
   const features = card.querySelector('.popup__features');
-  if (!offer.offer.features.length <= 0) {
+  if (offer.offer.features) {
     deleteUnnecessaryElements(features, offer.offer.features);
   } else {
     features.remove();
@@ -84,11 +86,15 @@ const createCard = (offer) => {
     description.remove();
   }
 
-  const photos = card.querySelector('.popup__photo');
   if (offer.offer.photos) {
-    photos.src = offer.offer.photos;
+    popupPhotos.innerHTML = '';
+    offer.offer.photos.forEach((photo) => {
+      const newPhoto = photoTemplate.cloneNode(true);
+      newPhoto.src = photo;
+      popupPhotos.appendChild(newPhoto);
+    });
   } else {
-    photos.remove();
+    popupPhotos.remove();
   }
 
   const avatar = card.querySelector('.popup__avatar');

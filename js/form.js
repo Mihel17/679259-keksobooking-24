@@ -103,5 +103,12 @@ const deactivate = () => {
 deactivate();
 
 
-export { activate, resetBtn, address };
+const resetAddForm = () => {
+  const price = AppartmentType[appartmentType[1].value];
+  offerPrice.min = price;
+  offerPrice.placeholder = price;
+};
+
+
+export { resetBtn, address, formAdd, activate, resetAddForm };
 

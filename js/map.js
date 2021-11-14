@@ -1,6 +1,6 @@
 import { createCard } from './create-card.js';
-import { offers } from './data.js';
-import { activate, resetBtn, address } from './form.js';
+import { activate, resetBtn, address, resetAddForm } from './form.js';
+const LOCATION_AFTER_POINT = 5;
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const TokioLocation = {
@@ -21,6 +21,9 @@ const Icon = {
     Y: 52,
   },
 };
+
+
+address.value = `${TokioLocation.LAT}, ${TokioLocation.LNG}`;
 
 
 const map = L.map('map');
@@ -44,10 +47,11 @@ const mainPinMarker = L.marker(
 );
 
 
-const turnOnMap = () => {
+const turnOnMap = (dataList) => {
   mainPinMarker.addTo(map);
   mainPinMarker.on('moveend', (evt) => {
-    address.value = evt.target.getLatLng();
+    const location = evt.target.getLatLng();
+    address.value = `${location.lat.toFixed(LOCATION_AFTER_POINT)}, ${location.lng.toFixed(LOCATION_AFTER_POINT)}`;
   });
   const addMarkers = (offerData) => {
     const pinIcon = L.icon({
@@ -68,29 +72,30 @@ const turnOnMap = () => {
       .addTo(markerGroup)
       .bindPopup(createCard(offerData));
   };
-  offers.forEach((item) => {
+  dataList.forEach((item) => {
     addMarkers(item);
   });
 };
 
 
-map.on('load', () => {
-  activate();
-  turnOnMap();
-}).setView({
-  lat: TokioLocation.LAT,
-  lng: TokioLocation.LNG,
-}, 10);
-L.tileLayer(
-  LINK_OPEN_MAP,
-  {
-    attribution: COPY_OPEN_MAP,
-  },
-).addTo(map);
+const mapLoading = (data) => {
+  map.on('load', () => {
+    activate();
+    turnOnMap(data);
+  }).setView({
+    lat: TokioLocation.LAT,
+    lng: TokioLocation.LNG,
+  }, 10);
+  L.tileLayer(
+    LINK_OPEN_MAP,
+    {
+      attribution: COPY_OPEN_MAP,
+    },
+  ).addTo(map);
+};
 
 
-const resetMap = () => {
-  markerGroup.clearLayers();
+const reset = () => {
   mainPinMarker.setLatLng({
     lat: TokioLocation.LAT,
     lng: TokioLocation.LNG,
@@ -99,8 +104,12 @@ const resetMap = () => {
     lat: TokioLocation.LAT,
     lng: TokioLocation.LNG,
   }, 10);
-  turnOnMap();
+  resetAddForm();
+  address.value = `${TokioLocation.LAT}, ${TokioLocation.LNG}`;
 };
-resetBtn.addEventListener('click', resetMap);
+resetBtn.addEventListener('click', reset);
+
+
+export { reset, mapLoading, map };
 
 
