@@ -23,7 +23,7 @@ const Icon = {
 };
 
 
-address.value = `${TokioLocation.LAT}, ${TokioLocation.LNG}`;
+address.value = `${TokioLocation.LAT.toFixed(LOCATION_AFTER_POINT)}, ${TokioLocation.LNG.toFixed(LOCATION_AFTER_POINT)}`;
 
 
 const map = L.map('map');
@@ -110,6 +110,11 @@ const reset = () => {
 resetBtn.addEventListener('click', reset);
 
 
-export { reset, mapLoading, map };
+const removeMarkers = () => {
+  markerGroup.clearLayers();
+};
+
+
+export { reset, mapLoading, removeMarkers, turnOnMap, map };
 
 
