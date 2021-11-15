@@ -1,4 +1,4 @@
-import { copyOfData } from './get-data.js';
+import { copyOfData } from './data.js';
 import { resetBtn, formFilter } from './form.js';
 import { filterData } from './filter.js';
 import { resetMap } from './map.js';
