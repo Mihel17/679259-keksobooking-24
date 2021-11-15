@@ -1,9 +1,9 @@
 const TYPE_TRANSLATE = {
-  flat: 'Квартира',
-  bungalow: 'Бунгало',
-  house: 'Дом',
-  palace: 'Дворец',
-  hotel: 'Отель',
+  'flat': 'Квартира',
+  'bungalow': 'Бунгало',
+  'house': 'Дом',
+  'palace': 'Дворец',
+  'hotel': 'Отель',
 };
 const mapContainer = document.querySelector('#map');
 const cardTemplate = document.querySelector('#card')
@@ -57,7 +57,6 @@ const createCard = (offer) => {
     type.remove();
   }
 
-  // гостей`;// make funct "1 гостей"
   const guests = card.querySelector('.popup__text--capacity');
   if (offer.offer.guests) {
     guests.textContent = `${offer.offer.rooms} комнаты для ${offer.offer.guests}`;

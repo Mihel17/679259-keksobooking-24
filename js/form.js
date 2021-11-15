@@ -1,20 +1,20 @@
 const formAdd = document.querySelector('.ad-form');
-const filter = document.querySelector('.map__filters');
+const formFilter = document.querySelector('.map__filters');
 const offerPrice = formAdd.querySelector('#price');
 const address = formAdd.querySelector('#address');
 const appartmentType = formAdd.querySelector('#type');
 const roomNumber = formAdd.querySelector('#room_number');
-const capacity = Array.from(document.querySelector('#capacity').children);
+const capacityItems = Array.from(document.querySelector('#capacity').children);
 const disabledFilelds = document.querySelectorAll('fieldset, select.map__filter');
 const timeIn = formAdd.querySelector('#timein');
 const timeOut = formAdd.querySelector('#timeout');
 const resetBtn = document.querySelector('.ad-form__reset');
 const AppartmentType = {
-  bungalow: 0,
-  flat: 1000,
-  hotel: 3000,
-  house: 5000,
-  palace: 10000,
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel': 3000,
+  'house': 5000,
+  'palace': 10000,
 };
 const RoomsNumber = {
   1: [1],
@@ -24,7 +24,7 @@ const RoomsNumber = {
 };
 
 
-capacity
+capacityItems
   .filter((option) => !(Number(option.value) === 1))
   .forEach((option) => option.style.display = 'none');
 
@@ -32,7 +32,7 @@ capacity
 const onRoomNumberChage = (evt) => {
   const roomNumberValue = evt.target.value;
   const guestNumberValue = RoomsNumber[roomNumberValue];
-  capacity.forEach((option) => {
+  capacityItems.forEach((option) => {
     const isNecessary = guestNumberValue.some((necessaryValue) => parseInt(option.value, 10) === necessaryValue ? 1 : 0);
     if (!isNecessary) {
       option.style.display = 'none';
@@ -88,7 +88,7 @@ const activate = () => {
   addFormListener();
   setState();
   formAdd.classList.remove('ad-form--disabled');
-  filter.classList.remove('map__filters--disabled');
+  formFilter.classList.remove('map__filters--disabled');
   address.readOnly = true;
 };
 
@@ -97,7 +97,7 @@ const deactivate = () => {
   deleteFormListener();
   setState();
   formAdd.classList.add('ad-form--disabled');
-  filter.classList.add('map__filters--disabled');
+  formFilter.classList.add('map__filters--disabled');
   address.readOnly = false;
 };
 deactivate();
@@ -110,5 +110,5 @@ const resetAddForm = () => {
 };
 
 
-export { resetBtn, address, formAdd, activate, resetAddForm };
+export { resetBtn, address, formAdd, formFilter, activate, resetAddForm };
 
