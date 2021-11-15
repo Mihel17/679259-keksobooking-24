@@ -33,20 +33,24 @@ const filterRules = {
   'housing-features': (data, filter) => {
     const activeCheckboxes = Array.from(filter.querySelectorAll('input[type="checkbox"]:checked'));
 
-    return activeCheckboxes.every((checkbox) => {
-      data.offer.features.some((feature) => {
 
-        //===================
-        console.log('data / checkbox', '|', feature, '/', checkbox.value, '|', feature === checkbox.valu);
-        //===================
+    if (data.offer.features) {
+      return activeCheckboxes.every((checkbox) => {
+        data.offer.features.some((feature) => {
 
-        return feature === checkbox.valu;
+          //===================
+          console.log('data / checkbox', '|', feature, '/', checkbox.value, '|', String(feature) === String(checkbox.valu));
+          //===================
+
+          return feature === checkbox.valu;
+        });
+
       });
+    }
+    return false;
 
-    });
+
   },
-
-
 };
 
 
