@@ -39,15 +39,16 @@ const filterRules = {
         data.offer.features.some((feature) => {
 
           //===================
-          console.log('data / checkbox', '|', feature, '/', checkbox.value, '|', String(feature) === String(checkbox.valu));
+          console.log('data / checkbox', '|', feature, '=', checkbox.value, '|', feature === checkbox.value);
           //===================
 
-          return feature === checkbox.valu;
+          return feature === checkbox.value;
         });
 
       });
+    } else {
+      return false;
     }
-    return false;
 
 
   },
