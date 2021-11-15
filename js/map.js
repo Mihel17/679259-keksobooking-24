@@ -1,5 +1,5 @@
 import { createCard } from './create-card.js';
-import { activate, resetBtn, address, resetAddForm } from './form.js';
+import { activate, address, resetAddForm } from './form.js';
 const LOCATION_AFTER_POINT = 5;
 const COPY_OPEN_MAP = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 const LINK_OPEN_MAP = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -23,7 +23,10 @@ const Icon = {
 };
 
 
-address.value = `${TokioLocation.LAT.toFixed(LOCATION_AFTER_POINT)}, ${TokioLocation.LNG.toFixed(LOCATION_AFTER_POINT)}`;
+const setAddress = () => {
+  address.value = `${TokioLocation.LAT.toFixed(LOCATION_AFTER_POINT)}, ${TokioLocation.LNG.toFixed(LOCATION_AFTER_POINT)}`;
+};
+setAddress();
 
 
 const map = L.map('map');
@@ -95,7 +98,7 @@ const mapLoading = (data) => {
 };
 
 
-const reset = () => {
+const resetMap = () => {
   mainPinMarker.setLatLng({
     lat: TokioLocation.LAT,
     lng: TokioLocation.LNG,
@@ -105,9 +108,10 @@ const reset = () => {
     lng: TokioLocation.LNG,
   }, 10);
   resetAddForm();
-  address.value = `${TokioLocation.LAT}, ${TokioLocation.LNG}`;
+  setTimeout(() => {
+    setAddress();
+  }, 1);
 };
-resetBtn.addEventListener('click', reset);
 
 
 const removeMarkers = () => {
@@ -115,6 +119,6 @@ const removeMarkers = () => {
 };
 
 
-export { reset, mapLoading, removeMarkers, turnOnMap, map };
+export { resetMap, mapLoading, removeMarkers, turnOnMap, map };
 
 

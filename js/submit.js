@@ -1,6 +1,7 @@
-import { request } from './request.js';
-import { reset, map } from './map.js';
+import { makeRequest } from './request.js';
+import { map } from './map.js';
 import { formAdd, resetAddForm } from './form.js';
+import { reset } from './reset.js';
 const ESCAPE = 'Escape';
 const body = document.querySelector('body');
 const modalSuccess = body.querySelector('#success')
@@ -48,8 +49,8 @@ const showErrorModal = () => {
 
 const submitOnSuccess = () => {
   showSuccessModal();
-  reset();
   map.closePopup();
+  reset();
 };
 
 
@@ -60,7 +61,7 @@ const submitOnErrror = () => {
 
 const onformAddSubmit = (evt) => {
   evt.preventDefault();
-  request(
+  makeRequest(
     submitOnSuccess,
     submitOnErrror,
     'POST',
@@ -68,3 +69,4 @@ const onformAddSubmit = (evt) => {
   );
 };
 formAdd.addEventListener('submit', onformAddSubmit);
+

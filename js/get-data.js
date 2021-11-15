@@ -1,25 +1,26 @@
-import { request } from './request.js';
+import { makeRequest } from './request.js';
 import { showAlert } from './utils/show-alert.js';
 import { filterData } from './filter.js';
 import { mapLoading } from './map.js';
+
 const mapFilters = document.querySelector('.map__filters');
-let filterResult = [];
+let copyOfData = [];
 
 
 const copyData = (data) => {
-  filterResult = data.slice();
-  return filterResult;
+  copyOfData = data.slice();
+  return copyOfData;
 };
 
 
 const onMapFilterChancge = () => {
-  filterData(filterResult);
+  filterData(copyOfData);
 };
 
 
 const onSuccess = (data) => {
   copyData(data);
-  mapLoading(filterResult.slice(0, 10));
+  mapLoading(copyOfData.slice(0, 10));
   mapFilters.addEventListener('change', onMapFilterChancge);
 };
 
@@ -29,4 +30,7 @@ const onFail = (err) => {
 };
 
 
-request(onSuccess, onFail, 'GET');
+makeRequest(onSuccess, onFail, 'GET');
+
+
+export { copyOfData };
