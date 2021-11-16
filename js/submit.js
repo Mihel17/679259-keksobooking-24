@@ -18,14 +18,26 @@ const showSuccessModal = () => {
   body.append(modal);
   formAdd.reset();
   resetAddForm();
-  window.addEventListener('keydown', (evt) => {
+  let removeEventListener = '';
+
+  const onWindowKeydown = (evt) => {
     if (evt.key === ESCAPE) {
       modal.remove();
+      removeEventListener();
     }
-  }, { once: true });
-  window.addEventListener('click', () => {
+  };
+  window.addEventListener('keydown', onWindowKeydown, { once: true });
+
+  const onWindowClick = () => {
     modal.remove();
-  }, { once: true });
+    removeEventListener();
+  };
+  window.addEventListener('click', onWindowClick, { once: true });
+
+  removeEventListener = () => {
+    window.removeEventListener('click', onWindowClick);
+    window.removeEventListener('keydown', onWindowKeydown);
+  };
 };
 
 
@@ -33,17 +45,33 @@ const showErrorModal = () => {
   const modal = modalError.cloneNode(true);
   const closeModal = modal.querySelector('.error__button');
   body.append(modal);
-  closeModal.addEventListener('click', () => {
-    modal.remove();
-  }, { once: true });
-  window.addEventListener('keydown', (evt) => {
+  let removeEventListener = '';
+
+  const onCloseModalClick = () => {
+    closeModal.remove();
+    removeEventListener();
+  };
+  closeModal.addEventListener('click', onCloseModalClick, { once: true });
+
+  const onWindowKeydown = (evt) => {
     if (evt.key === ESCAPE) {
       modal.remove();
+      removeEventListener();
     }
-  }, { once: true });
-  window.addEventListener('click', () => {
+  };
+  window.addEventListener('keydown', onWindowKeydown, { once: true });
+
+  const onWindowClick = () => {
     modal.remove();
-  }, { once: true });
+    removeEventListener();
+  };
+  window.addEventListener('click', onWindowClick, { once: true });
+
+  removeEventListener = () => {
+    window.removeEventListener('click', onWindowClick);
+    window.removeEventListener('keydown', onWindowKeydown);
+    closeModal.removeEventListener('click', onCloseModalClick);
+  };
 };
 
 
