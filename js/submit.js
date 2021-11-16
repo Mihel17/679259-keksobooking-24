@@ -59,7 +59,7 @@ const submitOnErrror = () => {
 };
 
 
-const onformAddSubmit = (evt) => {
+const onFormAddSubmit = (evt) => {
   evt.preventDefault();
   makeRequest(
     submitOnSuccess,
@@ -68,5 +68,5 @@ const onformAddSubmit = (evt) => {
     new FormData(evt.target),
   );
 };
-formAdd.addEventListener('submit', onformAddSubmit);
+formAdd.addEventListener('submit', onFormAddSubmit);
 

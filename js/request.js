@@ -1,4 +1,4 @@
-const Urls = {
+const Url = {
   GET: 'https://24.javascript.pages.academy/keksobooking/data',
   POST: 'https://24.javascript.pages.academy/keksobooking',
 };
@@ -6,7 +6,7 @@ const Urls = {
 
 const makeRequest = (onSuccess, onFail, method, body) => {
   fetch(
-    Urls[method],
+    Url[method],
     {
       method: method,
       body: body,
